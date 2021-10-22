@@ -1,7 +1,8 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ProjectService } from '../project.service';
+import { ProjectService } from '../../project.service';
 import { Layer } from './layer.model';
 import { Variation } from './item-variation/variation.model';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-layer-item',
@@ -13,8 +14,13 @@ export class LayerItemComponent implements OnInit {
   @Input() data!: Layer;
   @Input() index!: number;
   @ViewChild('nameInputElement') nameInputElement!: ElementRef<any>;
+
+  isUploading: boolean = false;
+  progress: number = 0;
+  infoMessage!: string;
   constructor(
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private router: Router
   ) { }
 
   ngOnInit(): void {
@@ -26,6 +32,10 @@ export class LayerItemComponent implements OnInit {
 
   remove(): void {
     this.projectService.projectLayers.splice(this.index, 1);
+  }
+
+  editVariations(): void {
+    this.router.navigate(['edit-layer-variations', this.index]);
   }
 
   shiftUp(): void {
@@ -48,7 +58,7 @@ export class LayerItemComponent implements OnInit {
     }
   }
 
-  onFileSelected(event: any) {
+  uploadFile(event: any) {
 
     const file:File = event.target.files[0];
 
@@ -60,18 +70,22 @@ export class LayerItemComponent implements OnInit {
         const uploadedVariation: Variation = {
           name: file.name,
           file: file,
+          size: file.size,
+          type: file.type,
           colors: [
 
           ]
         };
         this.projectService.projectLayers[this.index].variations.push(uploadedVariation);
-        const formData = new FormData();
+        
+        
+        this.progress = 0;
+        this.isUploading = true;
 
-        formData.append("thumbnail", file);
-
-        // const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-        // upload$.subscribe();
+        this.uploader.upload(file).subscribe((message: any) => {
+          this.isUploading = false;
+          this.infoMessage = message;
+        });
     }
 }
 }

@@ -1,0 +1,21 @@
+<input #nameInputElement [value]="this.data.name" (change)="saveName()" />
+
+<button class="edit-variation" (click)="fileUpload.click()">
+    <span>
+        <small>CHANGE FILE</small>
+    </span>
+    <input type="file" class="file-input"
+    (change)="editFile($event)" #fileUpload />
+</button>
+
+<input [value]="this.data.size + ' bytes'" [disabled]="true" />
+
+<input [value]="this.data.type" [disabled]="true" />
+
+<!-- PICK COLORS -->
+
+<button class="remove"  (click)="remove()">
+    <span>
+        <small>DELETE VARIATION</small> x
+    </span>
+</button>

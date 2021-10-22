@@ -9,6 +9,7 @@ import { ProjectService } from '../project.service';
 })
 export class ProjectSettingsPageComponent implements OnInit {
 
+  @ViewChild('itemsNameInputElement') itemsNameInputElement!: ElementRef<any>;
   @ViewChild('projectNameInputElement') projectNameInputElement!: ElementRef<any>;
   @ViewChild('collectionNameInputElement') collectionNameInputElement!: ElementRef<any>;
   @ViewChild('collectionFamilyNameInputElement') collectionFamilyNameInputElement!: ElementRef<any>;
@@ -19,6 +20,10 @@ export class ProjectSettingsPageComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
+  }
+
+  saveItemsName(): void {
+    this.projectService.itemsName = this.itemsNameInputElement.nativeElement.value;
   }
 
   saveProjectName(): void {

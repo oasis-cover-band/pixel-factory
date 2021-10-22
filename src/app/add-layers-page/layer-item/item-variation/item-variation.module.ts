@@ -10,6 +10,9 @@ import { ItemVariationComponent } from './item-variation.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    ItemVariationComponent
   ]
 })
 export class ItemVariationModule { }

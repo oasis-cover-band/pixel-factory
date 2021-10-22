@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { Layer } from './layer-item/layer.model';
+import { Layer } from './add-layers-page/layer-item/layer.model';
 import { CreatorShare } from './project-settings-page/creator-share/creator-share.model';
 
 @Injectable({
@@ -20,6 +20,7 @@ export class ProjectService {
   public printAsSVG: boolean = true;
   public printAsHTML: boolean = true;
   public sellerFeeBasisPoint = 10;
+  public itemsName = 'New Item Name';
   public collectionName = 'New Collection Name';
   public collectionSymbol = 'NCS';
   public collectionFamilyName = 'Collection Family Name';

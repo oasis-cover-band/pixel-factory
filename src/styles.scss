@@ -1,8 +1,8 @@
 @import './assets/fonts/stylesheet.css';
 @import './app/colors.scss';
 ::selection {
-  color: $white;
-  background: $black;
+  color: $black;
+  background: $white;
 }
 html, body {
     max-height:100vh;

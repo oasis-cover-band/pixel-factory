@@ -1,0 +1,21 @@
+
+<h4>
+    VARIATIONS FOR
+    <small>{{projectService.projectLayers[this.id].name}}S</small>
+</h4>
+
+<ng-container *ngFor="let itemVariation of projectService.projectLayers[this.id].variations; let index = index">
+    <app-item-variation [layerIndex]="this.id" [index]="index" [data]="itemVariation"></app-item-variation>
+</ng-container>
+
+<button (click)="backToLayers()">
+    <span>
+        BACK TO LAYERS
+    </span>
+</button>
+
+<button (click)="backToProject()">
+    <span>
+        BACK TO PROJECT
+    </span>
+</button>

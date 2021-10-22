@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ProjectService } from '../project.service';
-import { Layer } from '../layer-item/layer.model';
+import { Layer } from './layer-item/layer.model';
 
 @Component({
   selector: 'app-add-layers-page',

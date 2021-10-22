@@ -8,12 +8,15 @@ import { AddLayersPageModule } from './add-layers-page/add-layers-page.module';
 import { AddLayersPageComponent } from './add-layers-page/add-layers-page.component';
 import { ProjectSettingsPageModule } from './project-settings-page/project-settings-page.module';
 import { ProjectSettingsPageComponent } from './project-settings-page/project-settings-page.component';
+import { EditLayerVariationsPageModule } from './add-layers-page/edit-layer-variations-page/edit-layer-variations-page.module';
+import { EditLayerVariationsPageComponent } from './add-layers-page/edit-layer-variations-page/edit-layer-variations-page.component';
 
 const routes: Routes = [
   {path: '', component: LandingPageComponent},
   {path: 'start-new-project', component: NewProjectPageComponent},
   {path: 'add-layers', component: AddLayersPageComponent},
-  {path: 'edit-project', component: ProjectSettingsPageComponent}
+  {path: 'edit-project-settings', component: ProjectSettingsPageComponent},
+  {path: 'edit-layer-variations/:id', component: EditLayerVariationsPageComponent}
 ];
 
 @NgModule({
@@ -22,7 +25,8 @@ const routes: Routes = [
     LandingPageModule,
     NewProjectPageModule,
     AddLayersPageModule,
-    ProjectSettingsPageModule
+    ProjectSettingsPageModule,
+    EditLayerVariationsPageModule
   ],
   exports: [RouterModule]
 })

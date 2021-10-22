@@ -22,7 +22,7 @@ export class NewProjectPageComponent implements OnInit {
   }
 
   editProject(): void {
-    this.router.navigateByUrl('edit-project');
+    this.router.navigateByUrl('edit-project-settings');
   }
 
   backToHome(): void {

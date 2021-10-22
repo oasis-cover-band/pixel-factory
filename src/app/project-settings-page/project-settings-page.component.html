@@ -3,6 +3,7 @@
     <small>{{projectService.projectName}}</small>
 </h4>
 
+<input #itemsNameInputElement [value]="this.projectService.itemsName" (change)="saveItemsName()" />
 <input #projectNameInputElement [value]="this.projectService.projectName" (change)="saveProjectName()" />
 <input #collectionNameInputElement [value]="this.projectService.collectionName" (change)="saveCollectionName()" />
 <input #collectionFamilyNameInputElement [value]="this.projectService.collectionFamilyName" (change)="saveCollectionFamilyName()" />

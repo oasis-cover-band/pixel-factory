@@ -13,7 +13,7 @@
     </button>
 </span>
 
-<button class="edit-variations"  (click)="remove()">
+<button class="edit-variations"  (click)="editVariations()">
     <span>
         ({{this.data.variations?.length}})
         <small>EDIT VARIATIONS</small> *
@@ -25,7 +25,7 @@
         <small>ADD VARIATION</small> +
     </span>
     <input type="file" class="file-input"
-    (change)="onFileSelected($event)" #fileUpload />
+    (change)="uploadFile($event)" #fileUpload />
 </button>
 
 <button class="remove"  (click)="remove()">
