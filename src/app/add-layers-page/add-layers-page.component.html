@@ -1,1 +1,22 @@
-<p>add-layers-page works!</p>
+<h4>
+    ADDING LAYERS FOR
+    <small>{{projectService.projectName}}</small>
+</h4>
+
+<button (click)="addLayer()">
+    <span>
+        ADD LAYER
+    </span>
+</button>
+
+<ng-container *ngFor="let layerItem of projectService.projectLayers; let index = index">
+    <app-layer-item [index]="index" [data]="layerItem"></app-layer-item>
+</ng-container>
+
+
+
+<button (click)="backToProject()">
+    <span>
+        BACK TO PROJECT
+    </span>
+</button>

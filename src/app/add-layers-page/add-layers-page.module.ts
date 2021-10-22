@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { AddLayersPageComponent } from './add-layers-page.component';
+import { LayerItemModule } from '../layer-item/layer-item.module';
 
 
 
@@ -9,7 +10,11 @@ import { AddLayersPageComponent } from './add-layers-page.component';
     AddLayersPageComponent
   ],
   imports: [
-    CommonModule
+    CommonModule,
+    LayerItemModule
+  ],
+  exports: [
+    AddLayersPageComponent
   ]
 })
 export class AddLayersPageModule { }

@@ -1,0 +1,13 @@
+:host {
+    display:grid;
+    align-self: start;
+    grid-auto-rows: min-content;
+    grid-auto-columns: 1fr;
+
+    h4 {
+        display:grid;
+        small {
+            font-variant: small-caps;
+        }
+    }
+}

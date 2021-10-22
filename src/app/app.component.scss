@@ -23,8 +23,8 @@
         column-gap:10px;
         justify-items: center;
         justify-content: center;
-        align-items: center;
-        align-content: center;
+        align-items: start;
+        align-content: start;
         overflow: hidden;
         main {
             justify-self:stretch;
@@ -40,8 +40,13 @@
             align-content: start;
             overflow:hidden;
             overflow-y:scroll;
-            router-outlet ~ * {
-                grid-area: router-outlet;
+            ::ng-deep {
+                router-outlet + * {
+                    grid-area: router-outlet;
+                }
+                router-outlet ~ * {
+                    grid-area: router-outlet;
+                }
             }
         }
     }

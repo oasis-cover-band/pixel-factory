@@ -1,4 +1,9 @@
-<button>
+<h4>
+    CREATING
+    <small>{{projectService.projectName}}</small>
+</h4>
+
+<button (click)="addLayers()">
     <span>
         ADD LAYERS
     </span>
@@ -25,5 +30,11 @@
 <button>
     <span>
         GENERATE
+    </span>
+</button>
+
+<button (click)="backToHome()">
+    <span>
+        BACK TO HOME
     </span>
 </button>
