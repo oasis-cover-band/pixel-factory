@@ -1,0 +1,91 @@
+@font-face {
+    font-family: 'Eight Bit Dragon';
+    src: url('Eight-Bit-Dragon.eot');
+    src: url('Eight-Bit-Dragon.eot?#iefix') format('embedded-opentype'),
+        url('Eight-Bit-Dragon.woff2') format('woff2'),
+        url('Eight-Bit-Dragon.woff') format('woff'),
+        url('Eight-Bit-Dragon.ttf') format('truetype'),
+        url('Eight-Bit-Dragon.svg#Eight-Bit-Dragon') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Super Legend Boy';
+    src: url('Super-Legend-Boy.eot');
+    src: url('Super-Legend-Boy.eot?#iefix') format('embedded-opentype'),
+        url('Super-Legend-Boy.woff2') format('woff2'),
+        url('Super-Legend-Boy.woff') format('woff'),
+        url('Super-Legend-Boy.ttf') format('truetype'),
+        url('Super-Legend-Boy.svg#Super-Legend-Boy') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Teeny Tiny Pixls';
+    src: url('Teeny-Tiny-Pixls.eot');
+    src: url('Teeny-Tiny-Pixls.eot?#iefix') format('embedded-opentype'),
+        url('Teeny-Tiny-Pixls.woff2') format('woff2'),
+        url('Teeny-Tiny-Pixls.woff') format('woff'),
+        url('Teeny-Tiny-Pixls.ttf') format('truetype'),
+        url('Teeny-Tiny-Pixls.svg#Teeny-Tiny-Pixls') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Old School Adventures';
+    src: url('Old-School-Adventures.eot');
+    src: url('Old-School-Adventures.eot?#iefix') format('embedded-opentype'),
+        url('Old-School-Adventures.woff2') format('woff2'),
+        url('Old-School-Adventures.woff') format('woff'),
+        url('Old-School-Adventures.ttf') format('truetype'),
+        url('Old-School-Adventures.svg#Old-School-Adventures') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Pixeboy';
+    src: url('Pixeboy.eot');
+    src: url('Pixeboy.eot?#iefix') format('embedded-opentype'),
+        url('Pixeboy.woff2') format('woff2'),
+        url('Pixeboy.woff') format('woff'),
+        url('Pixeboy.ttf') format('truetype'),
+        url('Pixeboy.svg#Pixeboy') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Mozart';
+    src: url('MozartNBP.eot');
+    src: url('MozartNBP.eot?#iefix') format('embedded-opentype'),
+        url('MozartNBP.woff2') format('woff2'),
+        url('MozartNBP.woff') format('woff'),
+        url('MozartNBP.ttf') format('truetype'),
+        url('MozartNBP.svg#MozartNBP') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
+@font-face {
+    font-family: 'Old School Adventures2';
+    src: url('Old-School-Adventures_1.eot');
+    src: url('Old-School-Adventures_1.eot?#iefix') format('embedded-opentype'),
+        url('Old-School-Adventures_1.woff2') format('woff2'),
+        url('Old-School-Adventures_1.woff') format('woff'),
+        url('Old-School-Adventures_1.ttf') format('truetype'),
+        url('Old-School-Adventures_1.svg#Old-School-Adventures') format('svg');
+    font-weight: normal;
+    font-style: normal;
+    font-display: swap;
+}
+
