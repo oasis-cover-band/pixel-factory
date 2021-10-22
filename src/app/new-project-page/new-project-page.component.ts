@@ -21,6 +21,10 @@ export class NewProjectPageComponent implements OnInit {
     this.router.navigateByUrl('add-layers');
   }
 
+  editProject(): void {
+    this.router.navigateByUrl('edit-project');
+  }
+
   backToHome(): void {
     this.router.navigateByUrl('');
   }

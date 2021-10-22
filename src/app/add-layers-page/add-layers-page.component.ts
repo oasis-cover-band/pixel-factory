@@ -21,7 +21,9 @@ export class AddLayersPageComponent implements OnInit {
   addLayer(): void {
     const newLayer: Layer = {
       name: 'New Layer ' + this.projectService.projectLayers.length,
-      variations: []
+      variations: [
+        
+      ]
     };
     this.projectService.projectLayers.push(newLayer);
   }

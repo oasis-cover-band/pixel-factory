@@ -1,5 +1,4 @@
-<section class="content">
-    <main #mainContentElement [@routerAnimations]="outlet.isActivated ? outlet.activatedRoute : ''">
-      <router-outlet #outlet="outlet"></router-outlet>
-    </main>
-</section>
+
+<main #mainContentElement [@routerAnimations]="outlet.isActivated ? outlet.activatedRoute : ''">
+    <router-outlet #outlet="outlet"></router-outlet>
+</main>

@@ -1,0 +1,36 @@
+@import '../colors.scss';
+:host {
+    display:grid;
+    align-self: start;
+    grid-auto-rows: min-content;
+    grid-auto-columns: 1fr;
+    row-gap:10px;
+
+    input {
+        display:grid;
+        font-size:1rem;
+        font-variant: small-caps;
+        color: $white;
+    }
+    
+    h4 {
+        display:grid;
+        small {
+            font-variant: small-caps;
+        }
+    }
+    span.creator-shares-table {
+        display:grid;
+        align-self: start;
+        grid-auto-rows: min-content;
+        grid-auto-columns: 1fr;
+        row-gap:10px;
+        border:10px solid $white;
+        h3 {
+            font-size:1rem;
+            background: $white;
+            color: $black;
+            padding:10px 0px 10px 0px;
+        }
+    }
+}

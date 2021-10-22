@@ -7,14 +7,14 @@ trigger('routerAnimations', [
         query(
             ':enter',
             [
-                style({transform:'translateY(100vh)'}),
+                style({transform:'translateY(100vh)', pointerEvents: 'none'}),
             ],
             { optional: true }
             ),
         query(
             ':leave',
             [
-                animate('1s ease-out', style({transform:'translateY(-100vh)', height: '0px'})),
+                animate('1s ease-out', style({transform:'translateY(-100vh)', height: '0px', pointerEvents: 'none'})),
             ],
             { optional: true }
             ),

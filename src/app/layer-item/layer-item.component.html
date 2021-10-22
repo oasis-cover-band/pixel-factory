@@ -1,6 +1,35 @@
 <input #nameInputElement [value]="this.data.name" (change)="saveName()" />
-<button (click)="remove()">
+
+<span class="shifters">
+    <button (click)="shiftDown()">
+        <span class="shift-down">
+            ^
+        </span>
+    </button>
+    <button (click)="shiftUp()">
+        <span class="shift-up">
+            ^
+        </span>
+    </button>
+</span>
+
+<button class="edit-variations"  (click)="remove()">
     <span>
-        X
+        ({{this.data.variations?.length}})
+        <small>EDIT VARIATIONS</small> *
+    </span>
+</button>
+
+<button class="add-variations" (click)="fileUpload.click()">
+    <span>
+        <small>ADD VARIATION</small> +
+    </span>
+    <input type="file" class="file-input"
+    (change)="onFileSelected($event)" #fileUpload />
+</button>
+
+<button class="remove"  (click)="remove()">
+    <span>
+        <small>DELETE LAYER</small> x
     </span>
 </button>

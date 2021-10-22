@@ -14,4 +14,32 @@
         font-variant: small-caps;
         color: $white;
     }
+    input.file-input {
+        display: none;
+    }
+    span.shift-up { // lol =D
+        transform:rotate(180deg);
+    }
+    button {
+        &.add-variations {
+            background:$green;
+        }
+        &.edit-variations {
+            background:$blue;
+        }
+        &.remove {
+            background:$red;
+        }
+        &:hover {
+            background:$white;
+        }
+    }
+    span {
+        display:grid;
+        align-content: center;
+        align-items: center;
+        small {
+            font-size:0.75rem;
+        }
+    }
 }

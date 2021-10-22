@@ -181,6 +181,8 @@ input {
 
 button {
     pointer-events: visible;
+    min-height:100%;
+    max-height:100%;
     min-width:100%;
     max-width:100%;
     transition:0.2s;
@@ -195,11 +197,14 @@ button {
     '. . .';
     grid-template-columns: 10px 1fr 10px;
     grid-template-rows: 10px 1fr 10px;
+    align-items: center;
+    align-content: center;
     &:hover {
         color:$black;
         background:$white;
     }
     span {
         grid-area:spanx;
+        pointer-events: none;
     }
 }

@@ -1,0 +1,21 @@
+@import '../../colors.scss';
+
+:host {
+    display:grid;
+    align-self: start;
+    grid-auto-rows: 1fr;
+    grid-template-columns: 0.2fr 0.75fr 0.05fr;
+    grid-auto-flow: column;
+    align-items: center;
+    align-content: center;
+    h5 {
+        font-size:1rem;
+    }
+    h4 {
+        font-size:0.75rem;
+    }
+    &:nth-of-type(even) {
+        background:$white;
+        color:$black;
+    }
+}
