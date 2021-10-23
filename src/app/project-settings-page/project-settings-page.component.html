@@ -3,19 +3,19 @@
     <small>{{projectService.projectName}}</small>
 </h4>
 
-<input #itemsNameInputElement [value]="this.projectService.itemsName" (change)="saveItemsName()" />
-<input #projectNameInputElement [value]="this.projectService.projectName" (change)="saveProjectName()" />
-<input #collectionNameInputElement [value]="this.projectService.collectionName" (change)="saveCollectionName()" />
-<input #collectionFamilyNameInputElement [value]="this.projectService.collectionFamilyName" (change)="saveCollectionFamilyName()" />
+<input #itemsNameInputElement placeholder="NFT Item Name" [value]="this.projectService.itemsName" (change)="saveItemsName()" />
+<input #projectNameInputElement placeholder="Project Name" [value]="this.projectService.projectName" (change)="saveProjectName()" />
+<input #collectionNameInputElement placeholder="Collection Name" [value]="this.projectService.collectionName" (change)="saveCollectionName()" />
+<input #collectionFamilyNameInputElement placeholder="Collection Family Name" [value]="this.projectService.collectionFamilyName" (change)="saveCollectionFamilyName()" />
 
 <span class="creator-shares-table">
-    <h3>CREATOR SHARES</h3>
+    <h3>CREATOR SHARES <b class="clickable" (click)="addCreatorShare()">+</b></h3>
     <ng-container *ngFor="let creatorShare of projectService.creatorShares; let index = index">
         <app-creator-share [index]="index" [data]="creatorShare"></app-creator-share>
     </ng-container>
 </span>
 
-<button (click)="backToProject()">
+<button class="back-project" (click)="backToProject()">
     <span>
         BACK TO PROJECT
     </span>

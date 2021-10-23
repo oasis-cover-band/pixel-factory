@@ -1,8 +1,9 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { ProjectService } from '../../project.service';
 import { Layer } from './layer.model';
 import { Variation } from './item-variation/variation.model';
 import { Router } from '@angular/router';
+import { UploaderService } from 'src/app/tools/uploader.service';
+import { LayersService } from 'src/app/project-tools/layers.service';
 
 @Component({
   selector: 'app-layer-item',
@@ -19,19 +20,24 @@ export class LayerItemComponent implements OnInit {
   progress: number = 0;
   infoMessage!: string;
   constructor(
-    private projectService: ProjectService,
-    private router: Router
+    private layersService: LayersService,
+    private router: Router,
+    private uploaderService: UploaderService
   ) { }
 
   ngOnInit(): void {
   }
 
   saveName(): void {
-    this.projectService.projectLayers[this.index].name = this.nameInputElement.nativeElement.value;
+    this.layersService.projectLayers[this.index].name = this.nameInputElement.nativeElement.value;
+  }
+
+  toggleRarity(): void {
+    this.layersService.projectLayers[this.index].storeForRarity = !this.layersService.projectLayers[this.index].storeForRarity;
   }
 
   remove(): void {
-    this.projectService.projectLayers.splice(this.index, 1);
+    this.layersService.projectLayers.splice(this.index, 1);
   }
 
   editVariations(): void {
@@ -39,12 +45,12 @@ export class LayerItemComponent implements OnInit {
   }
 
   shiftUp(): void {
-    if (this.index >= this.projectService.projectLayers.length - 1) {
+    if (this.index >= this.layersService.projectLayers.length - 1) {
       return;
     } else {
-      const temporaryLayer = this.projectService.projectLayers[this.index + 1];
-      this.projectService.projectLayers[this.index + 1] = this.data;
-      this.projectService.projectLayers[this.index] = temporaryLayer;
+      const temporaryLayer = this.layersService.projectLayers[this.index + 1];
+      this.layersService.projectLayers[this.index + 1] = this.data;
+      this.layersService.projectLayers[this.index] = temporaryLayer;
     }
   }
 
@@ -52,9 +58,9 @@ export class LayerItemComponent implements OnInit {
     if (this.index <= 0) {
       return;
     } else {
-      const temporaryLayer = this.projectService.projectLayers[this.index - 1];
-      this.projectService.projectLayers[this.index - 1] = this.data;
-      this.projectService.projectLayers[this.index] = temporaryLayer;
+      const temporaryLayer = this.layersService.projectLayers[this.index - 1];
+      this.layersService.projectLayers[this.index - 1] = this.data;
+      this.layersService.projectLayers[this.index] = temporaryLayer;
     }
   }
 
@@ -65,27 +71,32 @@ export class LayerItemComponent implements OnInit {
     if (file) {
 
         console.dir(file);
-        console.dir(
-          this.projectService.projectLayers[this.index].variations);
+        
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = event => {
         const uploadedVariation: Variation = {
           name: file.name,
           file: file,
           size: file.size,
           type: file.type,
+          thumbnail: reader.result,
           colors: [
 
           ]
         };
-        this.projectService.projectLayers[this.index].variations.push(uploadedVariation);
+        this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
         
         
         this.progress = 0;
         this.isUploading = true;
 
-        this.uploader.upload(file).subscribe((message: any) => {
+        this.uploaderService.upload(file).subscribe((message: any) => {
           this.isUploading = false;
           this.infoMessage = message;
         });
+      };
     }
 }
 }

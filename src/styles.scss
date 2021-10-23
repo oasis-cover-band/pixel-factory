@@ -19,9 +19,15 @@ html, body {
     cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAwklEQVRYhe2X0Q6AIAhFofX/v2wvYcJCsHTQ1n3LQHdPSIpwqQAXgk8ybyh/cy6yTAing1K4EURsY1qxQJnnyGfKS6AGIDegkXpKIpzAbgVYjjXnXoUTaL9LtxbcEyo1odVCKgKkIRKWYxr/HoH68JKEfC/XzE+gDk7aHXLt/ARW94VwAnf/AqLyzjpNYhAMJ+A5t7k6o9UHZBxk3gWautZGnZPCCZgnokYara719GfCkRrQZPWL/PeCWXp0twwn8OsAa3NSMb1rMd4AAAAASUVORK5CYII=) 14 0, pointer;
     * {
         cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAwklEQVRYhe2X0Q6AIAhFofX/v2wvYcJCsHTQ1n3LQHdPSIpwqQAXgk8ybyh/cy6yTAing1K4EURsY1qxQJnnyGfKS6AGIDegkXpKIpzAbgVYjjXnXoUTaL9LtxbcEyo1odVCKgKkIRKWYxr/HoH68JKEfC/XzE+gDk7aHXLt/ARW94VwAnf/AqLyzjpNYhAMJ+A5t7k6o9UHZBxk3gWautZGnZPCCZgnokYara719GfCkRrQZPWL/PeCWXp0twwn8OsAa3NSMb1rMd4AAAAASUVORK5CYII=) 14 0, pointer;
+        &:active, &:focus {
+            cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAwklEQVRYhe2X0Q6AIAhFofX/v2wvYcJCsHTQ1n3LQHdPSIpwqQAXgk8ybyh/cy6yTAing1K4EURsY1qxQJnnyGfKS6AGIDegkXpKIpzAbgVYjjXnXoUTaL9LtxbcEyo1odVCKgKkIRKWYxr/HoH68JKEfC/XzE+gDk7aHXLt/ARW94VwAnf/AqLyzjpNYhAMJ+A5t7k6o9UHZBxk3gWautZGnZPCCZgnokYara719GfCkRrQZPWL/PeCWXp0twwn8OsAa3NSMb1rMd4AAAAASUVORK5CYII=) 14 0, pointer;
+        }
     }
     input, button, a, img, *.clickable {
         cursor: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACAAAAAgCAYAAABzenr0AAAAzElEQVRYR+2X0Q6AIAhF5f8/2jYXZkwEjNSVvVUjDpcrGgT7FUkI2D9xRfQETwNIiWO85wfINfQUEyxBG2ArsLwC0jioGt5zFcwF4OYDPi/mBYKm4t0U8ATgRm3ThFoAqkhNgWkA0jJLvaOVSs7j3qMnSgXWBMiWPXe94QqMBMBc1VZIvaTu5u5pQewq0EqNZvIEMCmxAawK0DNkay9QmfFNAJUXfgGgUkLaE7j/h8fnASkxHTz0DGIBMCnBeeM7AArpUd3mz2x3C7wADglA8BcWMZhZAAAAAElFTkSuQmCC) 14 0, pointer;
+    }
+    input.file-input {
+        display: none!important;
     }
     font-size:16px;
     @media (min-width:1200px) {
@@ -201,10 +207,48 @@ button {
     align-content: center;
     &:hover {
         color:$black;
-        background:$white;
     }
     span {
         grid-area:spanx;
         pointer-events: none;
+    }
+    &.add-variations, &.success, &.add-layers, &.generate {
+        background:$green;
+        &:hover {
+            color:$green;
+        }
+    }
+    &.edit-variations, &.change-file, &.info {
+        background:$blue;
+        &:hover {
+            color:$blue;
+        }
+    }
+    &.back-layers {
+        background:$lightyellow;
+        &:hover {
+            color:$lightyellow;
+        }
+    }
+    &.back-project {
+        background:$yellow;
+        &:hover {
+            color:$yellow;
+        }
+    }
+    &.back-home {
+        background:$orange;
+        &:hover {
+            color:$orange;
+        }
+    }
+    &.remove, &.warning {
+        background:$red;
+        &:hover {
+            color:$red;
+        }
+    }
+    &:hover {
+        background:$white;
     }
 }

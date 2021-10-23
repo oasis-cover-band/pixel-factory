@@ -1,6 +1,6 @@
 <h4>
     CREATING
-    <small>{{projectService.projectName}}</small>
+    <small>{{nameService.projectName}}</small>
 </h4>
 
 <button (click)="editProject()">
@@ -11,23 +11,29 @@
 
 <button (click)="addLayers()">
     <span>
-        LAYERS
+        LAYER SETTINGS
     </span>
 </button>
 
 <button>
     <span>
-        METADATA
+        METADATA SETTINGS
     </span>
 </button>
 
 <button>
+    <span>
+        GENERATION SETTINGS
+    </span>
+</button>
+
+<button class="generate">
     <span>
         GENERATE
     </span>
 </button>
 
-<button (click)="backToHome()">
+<button class="back-home" (click)="backToHome()">
     <span>
         BACK TO HOME
     </span>

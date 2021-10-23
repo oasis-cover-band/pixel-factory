@@ -8,14 +8,25 @@
     grid-auto-flow: column;
     align-items: center;
     align-content: center;
-    h5 {
+    row-gap:10px;
+    input {
+        display:grid;
         font-size:1rem;
+        font-variant: small-caps;
+        color: $white;
     }
-    h4 {
+    h6 {
         font-size:0.75rem;
     }
     &:nth-of-type(even) {
         background:$white;
         color:$black;
+        input {
+            color:$black;
+            &::selection {
+                background:$black;
+                color:$white;
+            }
+        }
     }
 }

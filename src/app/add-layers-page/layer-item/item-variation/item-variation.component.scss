@@ -8,6 +8,16 @@
     grid-auto-flow: column;
     align-items: center;
     align-content: center;
+    figure {
+        overflow:hidden;
+        max-height:100px;
+        min-height:100px;
+        img {
+            object-fit: contain;
+            max-height:100px;
+            min-height:100px;
+        }
+    }
     input {
         display:grid;
         font-size:1rem;
@@ -20,24 +30,13 @@
     span.shift-up { // lol =D
         transform:rotate(180deg);
     }
-    button {
-        &.add-variations {
-            background:$green;
-        }
-        &.edit-variations {
-            background:$blue;
-        }
-        &.remove {
-            background:$red;
-        }
-        &:hover {
-            background:$white;
-        }
-    }
     span {
         display:grid;
         align-content: center;
         align-items: center;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
         small {
             font-size:0.75rem;
         }

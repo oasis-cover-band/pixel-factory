@@ -1,12 +1,14 @@
 
-<h6>
-    {{this.data.share}} %
-</h6>
+<input #sharePercentageInputElement placeholder="Share Percentage" [value]="this.data.share" (change)="saveShare()" />
 
-<h5>
-    {{this.data.address}}
-</h5>
+<input #addressInputElement placeholder="Creator Address" [value]="this.data.address" (change)="saveAddress()" />
+
+
 
 <ng-container *ngIf="this.projectService.creatorShares.length > 1">
-    x
+    <button class="remove"  (click)="remove()">
+        <span>
+            <small>x</small>
+        </span>
+    </button>
 </ng-container>

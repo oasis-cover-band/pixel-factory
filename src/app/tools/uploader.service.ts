@@ -3,7 +3,7 @@ import {
   HttpClient,
   HttpRequest,
   HttpEventType,
-  HttpEvent
+  HttpEvent,
 } from "@angular/common/http";
 import { map, tap, last } from "rxjs/operators";
 import { BehaviorSubject } from "rxjs";
@@ -43,11 +43,12 @@ export class UploaderService {
   }
 
   private getEventMessage(event: HttpEvent<any>, file: File) {
+
     switch (event.type) {
       case HttpEventType.Sent:
         return `Uploading file "${file.name}" of size ${file.size}.`;
       case HttpEventType.UploadProgress:
-        return Math.round((100 * event.loaded) / event.total);
+        return Math.round((100 * event.loaded) / event.total!);
       case HttpEventType.Response:
         return `File "${file.name}" was completely uploaded!`;
       default:

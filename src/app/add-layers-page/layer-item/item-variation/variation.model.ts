@@ -3,5 +3,6 @@ export class Variation {
     file!: File;
     size!: number;
     type!: string;
+    thumbnail!: string | ArrayBuffer | null; 
     colors!: number[];
 }

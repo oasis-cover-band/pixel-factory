@@ -4,13 +4,14 @@
     align-self: start;
     grid-auto-rows: min-content;
     grid-auto-columns: 1fr;
+    row-gap:10px;
 
     h4 {
         display:grid;
         font-variant: all-small-caps;
         small {
             font-variant: small-caps;
-            text-decoration:underline solid $primary;
+            text-decoration:underline solid $yellow;
         }
     }
 }

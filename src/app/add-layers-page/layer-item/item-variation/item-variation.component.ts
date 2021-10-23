@@ -1,6 +1,7 @@
 import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
 import { Variation } from './variation.model';
-import { ProjectService } from 'src/app/project.service';
+import { UploaderService } from 'src/app/tools/uploader.service';
+import { LayersService } from 'src/app/project-tools/layers.service';
 
 @Component({
   selector: 'app-item-variation',
@@ -14,19 +15,23 @@ export class ItemVariationComponent implements OnInit {
   @Input() layerIndex!: number;
   @ViewChild('nameInputElement') nameInputElement!: ElementRef<any>;
 
+  isUploading: boolean = false;
+  progress: number = 0;
+  infoMessage!: string;
   constructor(
-    private projectService: ProjectService
+    private layersService: LayersService,
+    private uploaderService: UploaderService
   ) { }
 
   ngOnInit(): void {
   }
 
   saveName(): void {
-    this.projectService.projectLayers[this.layerIndex].variations[this.index].name = this.nameInputElement.nativeElement.value;
+    this.layersService.projectLayers[this.layerIndex].variations[this.index].name = this.nameInputElement.nativeElement.value;
   }
 
   remove(): void {
-    this.projectService.projectLayers[this.layerIndex].variations.splice(this.index, 1);
+    this.layersService.projectLayers[this.layerIndex].variations.splice(this.index, 1);
   }
 
   editFile(event: any) {
@@ -36,25 +41,29 @@ export class ItemVariationComponent implements OnInit {
     if (file) {
 
         console.dir(file);
-        console.dir(
-          this.projectService.projectLayers[this.index].variations);
+        
+        const reader = new FileReader();
+        reader.readAsDataURL(file);
+
+        reader.onload = event => {
         const uploadedVariation: Variation = {
           name: file.name,
           file: file,
           size: file.size,
           type: file.type,
+          thumbnail: reader.result,
           colors: [
 
           ]
         };
-        this.projectService.projectLayers[this.index].variations.push(uploadedVariation);
-        const formData = new FormData();
+        this.layersService.projectLayers[this.layerIndex].variations[this.index] = uploadedVariation;
 
-        formData.append("thumbnail", file);
 
-        // const upload$ = this.http.post("/api/thumbnail-upload", formData);
-
-        // upload$.subscribe();
+        this.uploaderService.upload(file).subscribe((message: any) => {
+          this.isUploading = false;
+          this.infoMessage = message;
+        });
+      };
     }
 }
 

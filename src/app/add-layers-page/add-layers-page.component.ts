@@ -1,18 +1,22 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProjectService } from '../project.service';
 import { Layer } from './layer-item/layer.model';
+import { LayersService } from '../project-tools/layers.service';
+import { ProjectNameService } from '../project-tools/project-name.service';
+import { fadeAnimations } from 'src/animations';
 
 @Component({
   selector: 'app-add-layers-page',
   templateUrl: './add-layers-page.component.html',
-  styleUrls: ['./add-layers-page.component.scss']
+  styleUrls: ['./add-layers-page.component.scss'],
+  animations: [fadeAnimations]
 })
 export class AddLayersPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public projectService: ProjectService
+    public layersService: LayersService,
+    public nameService: ProjectNameService
   ) { }
 
   ngOnInit(): void {
@@ -20,12 +24,13 @@ export class AddLayersPageComponent implements OnInit {
 
   addLayer(): void {
     const newLayer: Layer = {
-      name: 'New Layer ' + this.projectService.projectLayers.length,
+      name: 'New Layer ' + this.layersService.projectLayers.length,
       variations: [
         
-      ]
+      ],
+      storeForRarity: true
     };
-    this.projectService.projectLayers.push(newLayer);
+    this.layersService.projectLayers.push(newLayer);
   }
 
   backToProject(): void {

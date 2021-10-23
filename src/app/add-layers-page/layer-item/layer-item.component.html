@@ -1,4 +1,4 @@
-<input #nameInputElement [value]="this.data.name" (change)="saveName()" />
+<input #nameInputElement placeholder="Layer Name" [value]="this.data.name" (change)="saveName()" />
 
 <span class="shifters">
     <button (click)="shiftDown()">
@@ -13,10 +13,23 @@
     </button>
 </span>
 
+<span class="rarity">
+    <span>
+        <small>
+            RARE VARIATIONS?
+        </small>
+    </span>
+    <button class="toggle-rarity clickable"  (click)="toggleRarity()">
+        <span class="clickable" *ngIf="this.data.storeForRarity === true">
+            ✓
+        </span>
+    </button>
+</span>
+
 <button class="edit-variations"  (click)="editVariations()">
     <span>
         ({{this.data.variations?.length}})
-        <small>EDIT VARIATIONS</small> *
+        <small>EDIT VARIATIONS</small>
     </span>
 </button>
 

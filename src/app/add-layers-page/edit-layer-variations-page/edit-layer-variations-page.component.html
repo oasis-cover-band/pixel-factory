@@ -1,20 +1,28 @@
 
 <h4>
     VARIATIONS FOR
-    <small>{{projectService.projectLayers[this.id].name}}S</small>
+    <small>{{layersService.projectLayers[this.layerIndex]?.name}}</small>
 </h4>
 
-<ng-container *ngFor="let itemVariation of projectService.projectLayers[this.id].variations; let index = index">
-    <app-item-variation [layerIndex]="this.id" [index]="index" [data]="itemVariation"></app-item-variation>
+<button class="add-variations" (click)="fileUpload.click()">
+    <span>
+        + <small>ADD VARIATION</small>
+    </span>
+    <input type="file" class="file-input"
+    (change)="uploadFile($event)" #fileUpload />
+</button>
+
+<ng-container *ngFor="let itemVariation of layersService.projectLayers[this.layerIndex]?.variations; let index = index">
+    <app-item-variation [layerIndex]="this.layerIndex" [index]="index" [data]="itemVariation" [@fadeAnimations]></app-item-variation>
 </ng-container>
 
-<button (click)="backToLayers()">
+<button class="back-layers" (click)="backToLayers()">
     <span>
         BACK TO LAYERS
     </span>
 </button>
 
-<button (click)="backToProject()">
+<button class="back-project" (click)="backToProject()">
     <span>
         BACK TO PROJECT
     </span>

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProjectService } from '../project.service';
+import { ProjectNameService } from '../project-tools/project-name.service';
 
 @Component({
   selector: 'app-new-project-page',
@@ -11,7 +11,7 @@ export class NewProjectPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public projectService: ProjectService
+    public nameService: ProjectNameService
   ) { }
 
   ngOnInit(): void {

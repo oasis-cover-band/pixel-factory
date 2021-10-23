@@ -1,8 +1,13 @@
-<input #nameInputElement [value]="this.data.name" (change)="saveName()" />
 
-<button class="edit-variation" (click)="fileUpload.click()">
+    <figure class="image is-100x100">
+        <img [src]="this.data.thumbnail" />
+    </figure>
+
+<input #nameInputElement placeholder="Layer Variation Name" [value]="this.data.name" (change)="saveName()" />
+
+<button class="change-file" (click)="fileUpload.click()">
     <span>
-        <small>CHANGE FILE</small>
+        <small>CHANGE FILE</small> <->
     </span>
     <input type="file" class="file-input"
     (change)="editFile($event)" #fileUpload />

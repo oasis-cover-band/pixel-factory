@@ -1,20 +1,20 @@
 
 <h4>
     LAYERS FOR
-    <small>{{projectService.projectName}}</small>
+    <small>{{nameService.projectName}}</small>
 </h4>
 
-<button (click)="addLayer()">
+<button class="add-layers" (click)="addLayer()">
     <span>
-        ADD LAYER
+        + <small>ADD LAYER</small>
     </span>
 </button>
 
-<ng-container *ngFor="let layerItem of projectService.projectLayers; let index = index">
-    <app-layer-item [index]="index" [data]="layerItem"></app-layer-item>
+<ng-container *ngFor="let layerItem of layersService.projectLayers; let index = index">
+    <app-layer-item [index]="index" [data]="layerItem" [@fadeAnimations]></app-layer-item>
 </ng-container>
 
-<button (click)="backToProject()">
+<button  class="back-project" (click)="backToProject()">
     <span>
         BACK TO PROJECT
     </span>

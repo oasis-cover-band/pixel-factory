@@ -16,7 +16,7 @@ const routes: Routes = [
   {path: 'start-new-project', component: NewProjectPageComponent},
   {path: 'add-layers', component: AddLayersPageComponent},
   {path: 'edit-project-settings', component: ProjectSettingsPageComponent},
-  {path: 'edit-layer-variations/:id', component: EditLayerVariationsPageComponent}
+  {path: 'edit-layer-variations/:layerIndex', component: EditLayerVariationsPageComponent}
 ];
 
 @NgModule({

@@ -1,6 +1,7 @@
 import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
 import { Router } from '@angular/router';
-import { ProjectService } from '../project.service';
+import { ProjectService } from '../project-tools/project.service';
+import { CreatorShare } from './creator-share/creator-share.model';
 
 @Component({
   selector: 'app-project-settings-page',
@@ -36,6 +37,14 @@ export class ProjectSettingsPageComponent implements OnInit {
 
   saveCollectionFamilyName(): void {
     this.projectService.collectionFamilyName = this.collectionFamilyNameInputElement.nativeElement.value;
+  }
+
+  addCreatorShare(): void {
+    const addedCreatorShare: CreatorShare = {
+      address: this.projectService.creatorShares[0].address,
+      share: 0
+    };
+    this.projectService.creatorShares.push(addedCreatorShare);
   }
 
   backToProject(): void {
