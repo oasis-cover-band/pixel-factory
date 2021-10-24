@@ -19,11 +19,11 @@ export class GenerationService {
   defaultSubscription!: Subscription;
   raritySubscription!: Subscription;
   async generateSVG(SVGid: number): Promise<any> {
-    if (!this.defaultSubscription.closed) {
-      await this.defaultSubscription.unsubscribe();
+    if (!this.defaultSubscription?.closed) {
+      await this.defaultSubscription?.unsubscribe();
     }
-    if (!this.raritySubscription.closed) {
-      await this.raritySubscription.unsubscribe();
+    if (!this.raritySubscription?.closed) {
+      await this.raritySubscription?.unsubscribe();
     }
     await this.projectService.projectLayers.forEach(async (layerInProject: Layer) => {
       this.defaultSubscription = await this.fileService.getText(layerInProject.variations[0].file).subscribe(async defaultOutput => {
@@ -52,7 +52,16 @@ export class GenerationService {
           }
         });
 
-        await this.projectService.generatedItems[SVGid].generatedLayers.push(await generatedItemLayerToAdd);
+        if (await this.projectService.generatedItems[SVGid]) {
+          await this.projectService.generatedItems[SVGid]?.generatedLayers?.push(await generatedItemLayerToAdd);
+        } else {
+          this.projectService.generatedItems[SVGid] = await {
+            image0: '',
+            image1: '',
+            metadata: [],
+            generatedLayers: [await generatedItemLayerToAdd]
+          };
+        }
       })
     })
   }

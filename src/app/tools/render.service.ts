@@ -18,30 +18,30 @@ export class RenderService {
       const compiledImage: BehaviorSubject<string> = await new BehaviorSubject(`
         <link xmlns="http://www.w3.org/1999/xhtml" rel="stylesheet" href="` + this.projectService.externalCSSLink+`" type="text/css"/>
         `);
-        await this.compileSVGImage(compiledImage, SVGid, SVGElement).then(after => {
+        await this.compileSVGImage(await compiledImage, await SVGid, await SVGElement).then(after => {
 
         });
     } else {
       const compiledImage = await new BehaviorSubject(``);
-      await this.compileSVGImage(compiledImage, SVGid, SVGElement).then(after => {
+      await this.compileSVGImage(await compiledImage, await SVGid, await SVGElement).then(after => {
 
       });
     }
   }
 
   private async compileSVGImage(compiledImage: BehaviorSubject<string>, SVGid: number, SVGElement: ElementRef): Promise<any> {
-    await compiledImage.next(compiledImage.getValue().concat('<g id="' + SVGid +  '">'));
-    await this.compileSVGLayers(compiledImage, this.projectService.generatedItems[SVGid].generatedLayers).then(async afterSVGLayersCompiliation => {
-      await compiledImage.next(compiledImage.getValue().concat('</g>'));
-      await this.paintSVGToElement(SVGElement, compiledImage).then(afterPainting => {
+    await compiledImage.next(await compiledImage.getValue().concat('<g id="' + await SVGid +  '">'));
+    await this.compileSVGLayers(await compiledImage, await this.projectService.generatedItems[await SVGid]?.generatedLayers).then(async afterSVGLayersCompiliation => {
+      await compiledImage.next(await compiledImage.getValue().concat('</g>'));
+      await this.paintSVGToElement(await SVGElement, await compiledImage).then(afterPainting => {
 
       });
     });
   }
 
   private async compileSVGLayers(compiledImage: BehaviorSubject<string>, generatedItemsLayers: GeneratedItemLayer[]): Promise<any> {
-    await generatedItemsLayers.forEach(async (generatedItemLayer: GeneratedItemLayer) => {
-      await compiledImage.next(compiledImage.getValue().concat(generatedItemLayer.value));
+    await generatedItemsLayers?.forEach(async (generatedItemLayer: GeneratedItemLayer) => {
+      await compiledImage.next(await compiledImage.getValue().concat(await generatedItemLayer.value));
     });
   }
 

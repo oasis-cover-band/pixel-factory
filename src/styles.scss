@@ -212,7 +212,7 @@ button {
         grid-area:spanx;
         pointer-events: none;
     }
-    &.add-variations, &.success, &.add-layers, &.generate {
+    &.add-variations, &.success, &.add-layers, &.generate, &.start {
         background:$green;
         &:hover {
             color:$green;

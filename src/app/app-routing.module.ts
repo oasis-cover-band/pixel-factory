@@ -35,6 +35,8 @@ import {
 import {
   EditLayerVariationsPageComponent
 } from './add-layers-page/edit-layer-variations-page/edit-layer-variations-page.component';
+import { GenerationPageModule } from './generation-page/generation-page.module';
+import { GenerationPageComponent } from './generation-page/generation-page.component';
 
 const routes: Routes = [{
     path: '',
@@ -55,6 +57,10 @@ const routes: Routes = [{
   {
     path: 'edit-layer-variations/:layerIndex',
     component: EditLayerVariationsPageComponent
+  },
+  {
+    path: 'generate',
+    component: GenerationPageComponent
   }
 ];
 
@@ -65,7 +71,8 @@ const routes: Routes = [{
     NewProjectPageModule,
     AddLayersPageModule,
     ProjectSettingsPageModule,
-    EditLayerVariationsPageModule
+    EditLayerVariationsPageModule,
+    GenerationPageModule
   ],
   exports: [RouterModule]
 })

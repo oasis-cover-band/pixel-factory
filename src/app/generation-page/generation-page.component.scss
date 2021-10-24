@@ -1,13 +1,38 @@
 @import '../colors.scss';
 :host {
     display:grid;
-    align-items: center;
-    align-content: center;
-    justify-items: center;
-    justify-content: center;
-    grid-template-areas:
-    'generated-image';
-    svg#generated-image, canvas#generated-image {
-        grid-area:generated-image;
+    align-self: start;
+    grid-auto-rows: min-content;
+    grid-auto-columns: 1fr;
+    row-gap:10px;
+    h4 {
+        display:grid;
+        font-variant: all-small-caps;
+        small {
+            font-variant: small-caps;
+            text-decoration:underline solid $yellow;
+        }
+    }
+    div.image {
+        display:grid;
+        align-items: center;
+        align-content: center;
+        justify-items: center;
+        justify-content: center;
+        grid-template-areas:
+        'generated-image';
+        span#generated-image {
+            border:10px solid $white;
+            display:grid;
+            align-items: center;
+            align-content: center;
+            justify-items: center;
+            justify-content: center;
+        }
+        span#generated-image, svg#generated-image, canvas#generated-image {
+            min-height:300px;
+            min-width:300px;
+            grid-area:generated-image;
+        }
     }
 }

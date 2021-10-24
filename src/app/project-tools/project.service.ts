@@ -42,6 +42,7 @@ export class ProjectService {
   public sellerFeeBasisPoint = 10;
   public mintAmount = 100;
   public timeToDisplayGeneratedImage = 1;
+  public timeBetweenGenerations = 10;
   public collectionName = 'New Collection Name';
   public collectionSymbol = 'NCS';
   public collectionFamilyName = 'Collection Family Name';

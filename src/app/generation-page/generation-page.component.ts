@@ -2,6 +2,9 @@ import { Component, OnInit, ElementRef, ViewChild, AfterContentInit } from '@ang
 import { ProjectService } from '../project-tools/project.service';
 import { GenerationService } from '../tools/generation.service';
 import { RenderService } from '../tools/render.service';
+import { Router } from '@angular/router';
+import { ProjectNameService } from '../project-tools/project-name.service';
+import { BehaviorSubject } from 'rxjs';
 
 @Component({
   selector: 'app-generation-page',
@@ -13,32 +16,57 @@ export class GenerationPageComponent implements OnInit, AfterContentInit {
   @ViewChild('SVGElement') SVGElement!: ElementRef;
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
 
+  started: boolean = false;
+  paused: boolean = false // todo;
+  finished: boolean = false;
+  generating!: number;
   constructor(
     private projectService: ProjectService,
     private generationService: GenerationService,
-    private renderService: RenderService
+    private renderService: RenderService,
+    private router: Router,
+    public projectNameService: ProjectNameService
   ) { }
 
   ngOnInit(): void {
   }
 
   ngAfterContentInit(): void {
+  }
+
+  async startGeneration(): Promise<any> {
+    if (await this.started === true) {
+      return;
+    } else {
+      this.started = await true;
+    }
     for (let SVGid = 0; SVGid < this.projectService.mintAmount; SVGid++) {
-      this.generateSVG(SVGid).then(afterGeneration => {
-        setTimeout(() => {
-          this.destroySVG(SVGid);
-        }, this.projectService.timeToDisplayGeneratedImage * 1000);
+      setTimeout(async () => {
+      this.generating = SVGid;
+      await this.generateSVG(SVGid).then(afterGeneration => {
+        setTimeout(async () => {
+          await this.destroySVG(SVGid);
+          if (SVGid === this.projectService.mintAmount) {
+            this.finished = true;
+          }
+        }, (this.projectService.timeBetweenGenerations * 1000) - 1000);
       })
+    }, (this.projectService.timeBetweenGenerations * 1000) * SVGid);
     }
   }
 
   async generateSVG(SVGid: number): Promise<any> {
-    await this.generationService.generateSVG(SVGid);
-    await this.renderService.renderSVG(SVGid, this.SVGElement);
+    await this.generationService.generateSVG(await SVGid).then(async (after) => {
+      await this.renderService.renderSVG(await SVGid, await this.SVGElement);
+    });
   }
 
   async destroySVG(SVGid: number): Promise<any> {
 
+  }
+
+  backToProject(): void {
+    this.router.navigateByUrl('start-new-project');
   }
 
 }

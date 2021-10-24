@@ -1,16 +1,36 @@
-<svg
-id="generated-image"
-version="1.1"
-width="300"
-height="300"
-shape-rendering="crispEdges"
-xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
-xmlns="http://www.w3.org/2000/svg"
-xmlns:svg="http://www.w3.org/2000/svg"
-#SVGElement>
-</svg>
-<canvas
-id="generated-image"
-height="300"
-width="300"
-#canvasElement></canvas>
+<h4>
+    GENERATING ITEMS FOR
+  <small>{{projectNameService.projectName}}</small>
+</h4>
+
+<button class="start" (click)="startGeneration()">
+  <span *ngIf="started === false">
+    START
+  </span>
+  <span *ngIf="started === true && this.finished === false">
+      GENERATING #{{this.generating}}
+  </span>
+  <span *ngIf="started === true && this.finished === true">
+      FINISHED
+  </span>
+</button>
+
+<div class="image">
+
+  <span id="generated-image">
+    YOUR GENERATED
+    ITEMS WILL BE
+    DISPLAYED HERE
+  </span>
+  <svg id="generated-image" version="1.1" width="300" height="300" shape-rendering="crispEdges"
+    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns="http://www.w3.org/2000/svg"
+    xmlns:svg="http://www.w3.org/2000/svg" #SVGElement>
+  </svg>
+  <canvas id="generated-image" height="300" width="300" #canvasElement></canvas>
+</div>
+
+<button class="back-project" (click)="backToProject()">
+  <span>
+    BACK TO PROJECT
+  </span>
+</button>

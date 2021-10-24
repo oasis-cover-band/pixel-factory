@@ -10,6 +10,9 @@ import { GenerationPageComponent } from './generation-page.component';
   ],
   imports: [
     CommonModule
+  ],
+  exports: [
+    GenerationPageComponent
   ]
 })
 export class GenerationPageModule { }
