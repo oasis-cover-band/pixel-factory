@@ -41,6 +41,7 @@ export class ProjectService {
   public externalCSSLink: string = '';
   public sellerFeeBasisPoint = 10;
   public mintAmount = 100;
+  public timeToDisplayGeneratedImage = 1;
   public collectionName = 'New Collection Name';
   public collectionSymbol = 'NCS';
   public collectionFamilyName = 'Collection Family Name';

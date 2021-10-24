@@ -1,13 +1,16 @@
 
     <figure class="image is-100x100">
-        <img [src]="this.data.thumbnail" />
+        <img *ngIf="this.data.type !== 'image/svg+xml'"[src]="this.data.thumbnail" />
+        <svg #SVGVariationElement *ngIf="this.data.type === 'image/svg+xml'">
+            {{this.data.thumbnail}}
+        </svg>
     </figure>
 
 <input #nameInputElement placeholder="Layer Variation Name" [value]="this.data.name" (change)="saveName()" />
 
 <button class="change-file" (click)="fileUpload.click()">
     <span>
-        <small>CHANGE FILE</small> <->
+        <small>CHANGE FILE</small>
     </span>
     <input type="file" class="file-input"
     (change)="editVariationFile($event)" #fileUpload />

@@ -79,38 +79,74 @@ export class LayerItemComponent implements OnInit {
     }
   }
 
-  uploadVariationFile(event: any) {
+  async uploadVariationFile(event: any) {
 
-    const file: File = event.target.files[0];
+    const file: File = await event.target.files[0];
 
-    if (file) {
+    if (await file) {
 
-      const reader = new FileReader();
-      reader.readAsDataURL(file);
-
-      reader.onload = event => {
-        const uploadedVariation: Variation = {
-          name: file.name,
-          file: file,
-          size: file.size,
-          type: file.type,
-          thumbnail: reader.result,
-          colors: [
-
-          ],
-          rarity: 0
-        };
-        this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
-
-
-        this.progress = 0;
-        this.isUploading = true;
-
-        this.uploaderService.upload(file).subscribe((message: any) => {
-          this.isUploading = false;
-          this.infoMessage = message;
-        });
-      };
+      const reader = await new FileReader();
+      if (await file.type !== 'image/svg+xml') {
+        await this.doPNG(await reader, await file);
+      } else if (await file.type === 'image/svg+xml') {
+        await this.doSVG(await reader, await file);
+      }
     }
+  }
+
+  async doPNG(reader: FileReader, file: File): Promise < any > {
+    reader.readAsDataURL(file);
+
+    reader.onload = event => {
+      const uploadedVariation: Variation = {
+        name: file.name,
+        file: file,
+        size: file.size,
+        type: file.type,
+        thumbnail: reader.result,
+        colors: [
+
+        ],
+        rarity: 0
+      };
+      this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
+
+
+      this.progress = 0;
+      this.isUploading = true;
+
+      this.uploaderService.upload(file).subscribe((message: any) => {
+        this.isUploading = false;
+        this.infoMessage = message;
+      });
+    };
+  }
+
+  async doSVG(reader: FileReader, file: File): Promise < any > {
+    reader.readAsText(file);
+
+    reader.onload = event => {
+      const uploadedVariation: Variation = {
+        name: file.name,
+        file: file,
+        size: file.size,
+        type: file.type,
+        thumbnail: reader.result,
+        colors: [
+
+        ],
+        rarity: 0
+      };
+      this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
+
+
+      this.progress = 0;
+      this.isUploading = true;
+
+      this.uploaderService.upload(file).subscribe((message: any) => {
+        this.isUploading = false;
+        this.infoMessage = message;
+      });
+    };
   }
 }
