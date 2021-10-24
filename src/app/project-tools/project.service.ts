@@ -7,6 +7,8 @@ import {
 import {
   CreatorShare
 } from '../project-settings-page/creator-share/creator-share.model';
+import { GeneratedItem } from '../project-output/generated-item.model';
+import { GeneratedItemLayer } from '../project-output/generated-item-layer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -35,6 +37,8 @@ export class ProjectService {
   public printAsPNG: boolean = true; // options
   public printAsSVG: boolean = true; // options
   public printAsHTML: boolean = true;
+  public includeExternalCSS: boolean = false;
+  public externalCSSLink: string = '';
   public sellerFeeBasisPoint = 10;
   public mintAmount = 100;
   public collectionName = 'New Collection Name';
@@ -45,7 +49,7 @@ export class ProjectService {
   public projectLayers: Layer[] = [
 
   ];
-  public generatedItems: any[] = [
+  public generatedItems: GeneratedItem[] = [
 
   ];
   constructor() {}

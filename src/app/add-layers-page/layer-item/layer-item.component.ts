@@ -79,13 +79,11 @@ export class LayerItemComponent implements OnInit {
     }
   }
 
-  uploadFile(event: any) {
+  uploadVariationFile(event: any) {
 
     const file: File = event.target.files[0];
 
     if (file) {
-
-      console.dir(file);
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -99,7 +97,8 @@ export class LayerItemComponent implements OnInit {
           thumbnail: reader.result,
           colors: [
 
-          ]
+          ],
+          rarity: 0
         };
         this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
 

@@ -9,7 +9,7 @@
         + <small>ADD VARIATION</small>
     </span>
     <input type="file" class="file-input"
-    (change)="uploadFile($event)" #fileUpload />
+    (change)="uploadVariationFile($event)" #fileUpload />
 </button>
 
 <ng-container *ngFor="let itemVariation of layersService.projectLayers[this.layerIndex]?.variations; let index = index">

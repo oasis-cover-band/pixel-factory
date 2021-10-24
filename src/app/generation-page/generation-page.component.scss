@@ -1,0 +1,13 @@
+@import '../colors.scss';
+:host {
+    display:grid;
+    align-items: center;
+    align-content: center;
+    justify-items: center;
+    justify-content: center;
+    grid-template-areas:
+    'generated-image';
+    svg#generated-image, canvas#generated-image {
+        grid-area:generated-image;
+    }
+}

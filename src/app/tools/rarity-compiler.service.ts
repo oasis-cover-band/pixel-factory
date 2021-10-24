@@ -10,6 +10,7 @@ import {
 import {
   Metadata
 } from '../project-output/metadata.model';
+import { GeneratedItemLayer } from '../project-output/generated-item-layer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -30,21 +31,21 @@ export class RarityCompilerService {
 
   async setCollectionCount(): Promise < any > {
     await this.projectService.generatedItems.forEach(async (generatedItem: GeneratedItem) => {
-      await generatedItem.metadata.forEach(
-        async (metadataItem: Metadata) => {
+      await generatedItem.generatedLayers.forEach(
+        async (generatedLayer: GeneratedItemLayer) => {
           if (!this.collectionStatistics || this.collectionStatistics === undefined) {
             this.collectionStatistics = await {};
           }
 
-          if (!this.collectionStatistics[metadataItem.layer] || this.collectionStatistics[metadataItem.layer] === undefined) {
-            this.collectionStatistics[metadataItem.layer] = await {};
+          if (!this.collectionStatistics[generatedLayer.layer] || this.collectionStatistics[generatedLayer.layer] === undefined) {
+            this.collectionStatistics[generatedLayer.layer] = await {};
           }
 
-          if (!this.collectionStatistics[metadataItem.layer][metadataItem.variation] || this.collectionStatistics[metadataItem.layer][metadataItem.variation] === undefined) {
-            this.collectionStatistics[metadataItem.layer][metadataItem.variation] = await 1;
+          if (!this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] || this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] === undefined) {
+            this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] = await 1;
           } else {
-            this.collectionStatistics[metadataItem.layer][metadataItem.variation] = await
-            this.collectionStatistics[metadataItem.layer][metadataItem.variation] + 1;
+            this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] = await
+            this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] + 1;
           }
         });
     });

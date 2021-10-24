@@ -64,7 +64,7 @@ export class EditLayerVariationsPageComponent implements OnInit {
   }
 
 
-  uploadFile(event: any) {
+  uploadVariationFile(event: any) {
 
     const file: File = event.target.files[0];
 
@@ -84,7 +84,8 @@ export class EditLayerVariationsPageComponent implements OnInit {
           thumbnail: reader.result,
           colors: [
 
-          ]
+          ],
+          rarity: 0
         };
         this.layersService.projectLayers[this.layerIndex].variations.push(uploadedVariation);
 

@@ -45,13 +45,11 @@ export class ItemVariationComponent implements OnInit {
     this.layersService.projectLayers[this.layerIndex].variations.splice(this.index, 1);
   }
 
-  editFile(event: any) {
+  editVariationFile(event: any) {
 
     const file: File = event.target.files[0];
 
     if (file) {
-
-      console.dir(file);
 
       const reader = new FileReader();
       reader.readAsDataURL(file);
@@ -65,7 +63,8 @@ export class ItemVariationComponent implements OnInit {
           thumbnail: reader.result,
           colors: [
 
-          ]
+          ],
+          rarity: 0
         };
         this.layersService.projectLayers[this.layerIndex].variations[this.index] = uploadedVariation;
 

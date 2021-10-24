@@ -16,6 +16,7 @@ import {
 import {
   MetaplexFile
 } from '../project-output/metaplex-file.model';
+import { GeneratedItemLayer } from '../project-output/generated-item-layer.model';
 
 @Injectable({
   providedIn: 'root'
@@ -150,12 +151,12 @@ export class MetadataService {
 
   async setAttributes(generatedItemIndex: number): Promise < MetaplexAttribute[] > {
     const attributes: MetaplexAttribute[] = await [];
-    await this.projectService.generatedItems[generatedItemIndex].metadata.forEach(
-      async (metadataItem: Metadata) => {
+    await this.projectService.generatedItems[generatedItemIndex].generatedLayers.forEach(
+      async (generatedLayer: GeneratedItemLayer) => {
         await attributes.push({
-          trait_type: await metadataItem.layer,
-          value: await metadataItem.variation,
-          trait_count: await this.rarityCompilerService.collectionStatistics[metadataItem.layer][metadataItem.variation]
+          trait_type: await generatedLayer.layer,
+          value: await generatedLayer.variation,
+          trait_count: await this.rarityCompilerService.collectionStatistics[generatedLayer.layer][generatedLayer.variation]
         });
       }
     );
