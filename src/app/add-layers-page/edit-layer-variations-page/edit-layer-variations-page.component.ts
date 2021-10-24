@@ -1,10 +1,26 @@
-import { Component, OnInit } from '@angular/core';
-import { Router, ActivatedRoute } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Variation } from '../layer-item/item-variation/variation.model';
-import { UploaderService } from 'src/app/tools/uploader.service';
-import { LayersService } from 'src/app/project-tools/layers.service';
-import { fadeAnimations } from 'src/animations';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  Router,
+  ActivatedRoute
+} from '@angular/router';
+import {
+  Subscription
+} from 'rxjs';
+import {
+  Variation
+} from '../layer-item/item-variation/variation.model';
+import {
+  UploaderService
+} from 'src/app/tools/uploader.service';
+import {
+  LayersService
+} from 'src/app/project-tools/layers.service';
+import {
+  fadeAnimations
+} from 'src/animations';
 
 @Component({
   selector: 'app-edit-layer-variations-page',
@@ -25,7 +41,7 @@ export class EditLayerVariationsPageComponent implements OnInit {
     public layersService: LayersService,
     private activatedRoute: ActivatedRoute,
     private uploaderService: UploaderService
-  ) { }
+  ) {}
 
   ngOnInit(): void {
     this.activatedRouteListener = this.activatedRoute.params.subscribe(params => {
@@ -47,15 +63,15 @@ export class EditLayerVariationsPageComponent implements OnInit {
     this.router.navigateByUrl('start-new-project');
   }
 
-  
+
   uploadFile(event: any) {
 
-    const file:File = event.target.files[0];
+    const file: File = event.target.files[0];
 
     if (file) {
 
-        console.dir(file);
-        
+      console.dir(file);
+
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
@@ -71,8 +87,8 @@ export class EditLayerVariationsPageComponent implements OnInit {
           ]
         };
         this.layersService.projectLayers[this.layerIndex].variations.push(uploadedVariation);
-        
-        
+
+
         this.progress = 0;
         this.isUploading = true;
 
@@ -82,6 +98,6 @@ export class EditLayerVariationsPageComponent implements OnInit {
         });
       };
     }
-}
+  }
 
 }

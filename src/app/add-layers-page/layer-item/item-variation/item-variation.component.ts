@@ -1,7 +1,19 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Variation } from './variation.model';
-import { UploaderService } from 'src/app/tools/uploader.service';
-import { LayersService } from 'src/app/project-tools/layers.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
+import {
+  Variation
+} from './variation.model';
+import {
+  UploaderService
+} from 'src/app/tools/uploader.service';
+import {
+  LayersService
+} from 'src/app/project-tools/layers.service';
 
 @Component({
   selector: 'app-item-variation',
@@ -13,7 +25,7 @@ export class ItemVariationComponent implements OnInit {
   @Input() data!: Variation;
   @Input() index!: number;
   @Input() layerIndex!: number;
-  @ViewChild('nameInputElement') nameInputElement!: ElementRef<any>;
+  @ViewChild('nameInputElement') nameInputElement!: ElementRef < any > ;
 
   isUploading: boolean = false;
   progress: number = 0;
@@ -21,10 +33,9 @@ export class ItemVariationComponent implements OnInit {
   constructor(
     private layersService: LayersService,
     private uploaderService: UploaderService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   saveName(): void {
     this.layersService.projectLayers[this.layerIndex].variations[this.index].name = this.nameInputElement.nativeElement.value;
@@ -36,16 +47,16 @@ export class ItemVariationComponent implements OnInit {
 
   editFile(event: any) {
 
-    const file:File = event.target.files[0];
+    const file: File = event.target.files[0];
 
     if (file) {
 
-        console.dir(file);
-        
-        const reader = new FileReader();
-        reader.readAsDataURL(file);
+      console.dir(file);
 
-        reader.onload = event => {
+      const reader = new FileReader();
+      reader.readAsDataURL(file);
+
+      reader.onload = event => {
         const uploadedVariation: Variation = {
           name: file.name,
           file: file,
@@ -65,6 +76,6 @@ export class ItemVariationComponent implements OnInit {
         });
       };
     }
-}
+  }
 
 }

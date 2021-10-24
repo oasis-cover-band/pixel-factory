@@ -1,6 +1,16 @@
-import { Component, OnInit, Input, ElementRef, ViewChild } from '@angular/core';
-import { CreatorShare } from './creator-share.model';
-import { ProjectService } from '../../project-tools/project.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
+import {
+  CreatorShare
+} from './creator-share.model';
+import {
+  ProjectService
+} from '../../project-tools/project.service';
 
 @Component({
   selector: 'app-creator-share',
@@ -11,14 +21,13 @@ export class CreatorShareComponent implements OnInit {
 
   @Input() data!: CreatorShare;
   @Input() index!: number;
-  @ViewChild('sharePercentageInputElement') sharePercentageInputElement!: ElementRef<any>;
-  @ViewChild('addressInputElement') addressInputElement!: ElementRef<any>;
+  @ViewChild('sharePercentageInputElement') sharePercentageInputElement!: ElementRef < any > ;
+  @ViewChild('addressInputElement') addressInputElement!: ElementRef < any > ;
   constructor(
     public projectService: ProjectService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   saveAddress(): void {
     if (this.addressInputElement.nativeElement.value.length !== 36) {
@@ -30,9 +39,9 @@ export class CreatorShareComponent implements OnInit {
   }
 
   saveShare(): void {
-    if (isNaN(this.sharePercentageInputElement.nativeElement.value)
-    || this.sharePercentageInputElement.nativeElement.value < 0 ||
-    this.sharePercentageInputElement.nativeElement.value > 100) {
+    if (isNaN(this.sharePercentageInputElement.nativeElement.value) ||
+      this.sharePercentageInputElement.nativeElement.value < 0 ||
+      this.sharePercentageInputElement.nativeElement.value > 100) {
       this.sharePercentageInputElement.nativeElement.value = this.projectService.creatorShares[this.index].share;
       return;
     } else {
@@ -42,7 +51,7 @@ export class CreatorShareComponent implements OnInit {
         } else {
           this.addSharesToOtherCreators(Number(this.projectService.creatorShares[this.index].share!) - Number(this.sharePercentageInputElement.nativeElement.value));
         }
-      } 
+      }
       this.projectService.creatorShares[this.index].share = this.sharePercentageInputElement.nativeElement.value;
     }
   }
@@ -71,11 +80,11 @@ export class CreatorShareComponent implements OnInit {
     }
   }
 
-  async addSharesToOtherCreators(amountToAdd: number): Promise<any> {
+  async addSharesToOtherCreators(amountToAdd: number): Promise < any > {
     console.dir('amountToAdd');
     console.dir(amountToAdd);
     await this.projectService.creatorShares.forEach(async (creatorShare: CreatorShare, index: number) => {
-      if (creatorShare.share! + amountToAdd <= 100) {
+      if (creatorShare.share!+amountToAdd <= 100) {
         this.projectService.creatorShares[index].share = await Number(creatorShare.share!) + Number(amountToAdd);
         amountToAdd = await 0;
       } else {

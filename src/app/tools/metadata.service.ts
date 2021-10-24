@@ -1,146 +1,164 @@
-import { Injectable } from '@angular/core';
+import {
+  Injectable
+} from '@angular/core';
+import {
+  ProjectService
+} from '../project-tools/project.service';
+import {
+  RarityCompilerService
+} from './rarity-compiler.service';
+import {
+  Metadata
+} from '../project-output/metadata.model';
+import {
+  MetaplexAttribute
+} from '../project-output/metaplex-attribute.model';
+import {
+  MetaplexFile
+} from '../project-output/metaplex-file.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class MetadataService {
 
-  constructor() { }
+  constructor(
+    private projectService: ProjectService,
+    private rarityCompilerService: RarityCompilerService
+  ) {}
 
-  async generateMetadata(): Promise<any> {
-    
-    return;
-  //   return await JSON.stringify({
-  //   name: attributes.firstName
-  //   + ' ' +
-  //   attributes.lastName,
-  //   symbol: 'SPS',
-  //   description:
-  //   attributes.firstName
-  //   + ' ' +
-  //   attributes.lastName
-  //   + ' is a ' +
-  //   attributes.age
-  //   + ' year old ' +
-  //   this.solazenInfoService.showRace(attributeData)
-  //   + ' Pixeler with a power level of ' +
-  //   this.solazenInfoService.showPowerLevel(attributeData)
-  //   + '. His place of birth is on the planet of ' +
-  //   attributes.birthPlanetName
-  //   + '. This planet is located in the universal sector located at: ' +
-  //   attributes.birthUniversalName,
-  //   seller_fee_basis_points: 5,
-  //   image: 'https://www.superpixelers.fun/pixlers/' + attributeData.id + '/' + attributeData.id + '_portrait.png',
-  //   animation_url: 'https://www.superpixelers.fun/pixlers/' + attributeData.id + '/' + attributeData.id + '.html',
-  //   external_url: 'https://superpixelers.fun',
-  //   attributes: [
-  //     {
-  //       trait_type: 'firstName',
-  //       value: attributes.firstName
-  //     },
-  //     {
-  //       trait_type: 'lastName',
-  //       value: attributes.lastName
-  //     },
-  //     {
-  //       trait_type: 'age',
-  //       value: attributes.age
-  //     },
-  //     {
-  //       trait_type: 'superPixelerMaxLevel',
-  //       value: this.solazenInfoService.showSuperSolianMaxLevel(attributeData),
-  //       max_value: 2
-  //     },
-  //     {
-  //       trait_type: 'race',
-  //       value: this.solazenInfoService.showRace(attributeData),
-  //       trait_count: this.collectionStats.races['this.solazenInfoService.showRace(attributeData)']
-  //     },
-  //     {
-  //       trait_type: 'powerLevel',
-  //       value: this.solazenInfoService.showPowerLevel(attributeData),
-  //       max_value: this.collectionStats.maxPower
-  //     },
-  //     {
-  //       trait_type: 'wantedStatus',
-  //       value: this.solazenInfoService.calculateIfWanted(attributeData)
-  //     },
-  //     {
-  //       trait_type: 'currentStreetAddressNumber',
-  //       value: attributes.streetAddressNumber
-  //     },
-  //     {
-  //       trait_type: 'currentStreetAddressName',
-  //       value: attributes.streetAddressName
-  //     },
-  //     {
-  //       trait_type: 'currentCityName',
-  //       value: attributes.cityAddressName
-  //     },
-  //     {
-  //       trait_type: 'currentCountryName',
-  //       value: attributes.countryAddressName
-  //     },
-  //     {
-  //       trait_type: 'currentPlanetName',
-  //       value: attributes.planetAddressName
-  //     },
-  //     {
-  //       trait_type: 'currentUniversalAddress',
-  //       value: attributes.universalPlanetAddressName
-  //     },
-  //     {
-  //       trait_type: 'outfit',
-  //       value: this.solazenInfoService.showOutfit(attributeData)
-  //     },
-  //     {
-  //       trait_type: 'affiliations',
-  //       value: this.solazenInfoService.calculateAffiliations(attributeData)
-  //     },
-  //   ],
-  //   collection: {
-  //      name: 'Super Pixel Syndicate',
-  //      family: 'Black Sol Mafia'
-  //   },
-  //   properties: {
-  //     files: [
-  //       {
-  //         uri: 'https://www.superpixelsyndicate.art/pixlers/' + attributeData.id + '/' + attributeData.id + '_portrait.png',
-  //         type: 'image/png'
-  //       },
-  //       {
-  //         uri: 'https://www.superpixelsyndicate.art/pixlers/' + attributeData.id + '/' + attributeData.id + '.svg',
-  //         type: 'unknown'
-  //       },
-  //       {
-  //         uri: 'https://www.superpixelsyndicate.art/pixlers/' + attributeData.id + '/' + attributeData.id + '.html',
-  //         type: 'html'
-  //       },
-  //       {
-  //         uri: 'https://www.superpixelsyndicate.art/pixlers/' + attributeData.id + '/' + attributeData.id + '_portrait.html',
-  //         type: 'html'
-  //       },
-  //       {
-  //         uri: 'https://www.superpixelsyndicate.art/pixlers/' + attributeData.id + '/solazen-svg.scss',
-  //         type: 'unknown'
-  //       },
-  //       {
-  //         uri: 'https://www.superpixelsyndicate.art/pixlers/' + attributeData.id + '/' + attributeData.id + '.png',
-  //         type: 'image/png'
-  //       },
-  //       {
-  //         uri: 'https://www.superpixelsyndicate.art/pixlers/' + attributeData.id + '/' + attributeData.id + '_portrait.svg',
-  //         type: 'unknown'
-  //       }
-  //     ],
-  //     category: 'html',
-  //     creators: [
-  //       {
-  //         address: 'SOLFLR15asd9d21325bsadythp547912501b',
-  //         share: 100
-  //       }
-  //     ]
-  //   }
-  // });
-}
+  async generateMetadata(generatedItemIndex: number) {
+    let generatedMetadata;
+    await this.getData(generatedItemIndex).then(async (returnedValues: {
+      attributes: MetaplexAttribute[],
+      category: string,
+      files: MetaplexFile[],
+      name: string,
+      description: string
+    }) => {
+
+      generatedMetadata = await this.outputMetadata(generatedItemIndex, returnedValues);
+    });
+    return await generatedMetadata;
+  }
+
+  async outputMetadata(generatedItemIndex: number, returnedValues: {
+    attributes: MetaplexAttribute[],
+    category: string,
+    files: MetaplexFile[],
+    name: string,
+    description: string
+  }): Promise < any > {
+
+    return await JSON.stringify({
+      name: returnedValues.name,
+      symbol: this.projectService.collectionSymbol,
+      description: returnedValues.description,
+      seller_fee_basis_points: this.projectService.sellerFeeBasisPoint,
+      image: returnedValues.files[0].uri,
+      external_url: this.projectService.projectWebsite,
+      attributes: returnedValues.attributes,
+      collection: {
+        name: this.projectService.collectionName,
+        family: this.projectService.collectionFamilyName
+      },
+      properties: {
+        files: returnedValues.files,
+        category: returnedValues.category,
+        creators: this.projectService.creatorShares
+      }
+    });
+  }
+
+  async getData(generatedItemIndex: number): Promise < {
+    attributes: MetaplexAttribute[],
+    category: string,
+    files: MetaplexFile[],
+    name: string,
+    description: string
+  } > {
+    return {
+      attributes: await this.setAttributes(generatedItemIndex),
+      category: await this.setCategory(),
+      files: await this.setFiles(generatedItemIndex),
+      name: await this.setName(generatedItemIndex),
+      description: await this.setDescription(),
+    }
+  }
+
+  async setFiles(generatedItemIndex: number): Promise < MetaplexFile[] > {
+    const files: MetaplexFile[] = await [];
+    if (this.projectService.printAsPNG === true) {
+      if (this.projectService.storeOnCentralizedServer === true) {
+        await files.push({
+          uri: this.projectService.centralizedServerLocation + '/' + generatedItemIndex + '.png',
+          type: 'image/png'
+        });
+      } else {
+        await files.push({
+          uri: generatedItemIndex + '.png',
+          type: 'image/png'
+        });
+      }
+    }
+
+    if (this.projectService.printAsSVG === true) {
+      if (this.projectService.storeOnCentralizedServer === true) {
+        await files.push({
+          uri: this.projectService.projectWebsite + '/' + generatedItemIndex + '.svg',
+          type: 'unknown'
+        });
+      } else {
+        await files.push({
+          uri: generatedItemIndex + '.svg',
+          type: 'unknown'
+        });
+      }
+    }
+    return await files;
+  }
+
+  async setName(generatedItemIndex: number): Promise < string > {
+    let name: string;
+    if (this.projectService.dynamicItemsName === true) {
+      name = 'TODO';
+    } else {
+      name = await this.projectService.itemsName + ' #' + generatedItemIndex
+    }
+    return await name;
+  }
+
+  async setDescription(): Promise < string > {
+    let description: string;
+    if (this.projectService.dynamicItemsDescription === true) {
+      description = 'TODO';
+    } else {
+      description = await this.projectService.standardItemsDescription;
+    }
+    return await description;
+  }
+
+  async setCategory(): Promise < string > {
+    let category: string;
+    if (this.projectService.printAsPNG === true) {
+      category = await 'png';
+    } else {
+      category = await 'unknown';
+    }
+    return await category;
+  }
+
+  async setAttributes(generatedItemIndex: number): Promise < MetaplexAttribute[] > {
+    const attributes: MetaplexAttribute[] = await [];
+    await this.projectService.generatedItems[generatedItemIndex].metadata.forEach(
+      async (metadataItem: Metadata) => {
+        await attributes.push({
+          trait_type: await metadataItem.layer,
+          value: await metadataItem.variation,
+          trait_count: await this.rarityCompilerService.collectionStatistics[metadataItem.layer][metadataItem.variation]
+        });
+      }
+    );
+    return await attributes;
+  }
 }

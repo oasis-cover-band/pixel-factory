@@ -1,7 +1,18 @@
-import { Component, OnInit, ElementRef, ViewChild } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProjectService } from '../project-tools/project.service';
-import { CreatorShare } from './creator-share/creator-share.model';
+import {
+  Component,
+  OnInit,
+  ElementRef,
+  ViewChild
+} from '@angular/core';
+import {
+  Router
+} from '@angular/router';
+import {
+  ProjectService
+} from '../project-tools/project.service';
+import {
+  CreatorShare
+} from './creator-share/creator-share.model';
 
 @Component({
   selector: 'app-project-settings-page',
@@ -10,18 +21,17 @@ import { CreatorShare } from './creator-share/creator-share.model';
 })
 export class ProjectSettingsPageComponent implements OnInit {
 
-  @ViewChild('itemsNameInputElement') itemsNameInputElement!: ElementRef<any>;
-  @ViewChild('projectNameInputElement') projectNameInputElement!: ElementRef<any>;
-  @ViewChild('collectionNameInputElement') collectionNameInputElement!: ElementRef<any>;
-  @ViewChild('collectionFamilyNameInputElement') collectionFamilyNameInputElement!: ElementRef<any>;
-  
+  @ViewChild('itemsNameInputElement') itemsNameInputElement!: ElementRef < any > ;
+  @ViewChild('projectNameInputElement') projectNameInputElement!: ElementRef < any > ;
+  @ViewChild('collectionNameInputElement') collectionNameInputElement!: ElementRef < any > ;
+  @ViewChild('collectionFamilyNameInputElement') collectionFamilyNameInputElement!: ElementRef < any > ;
+
   constructor(
     private router: Router,
     public projectService: ProjectService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   saveItemsName(): void {
     this.projectService.itemsName = this.itemsNameInputElement.nativeElement.value;

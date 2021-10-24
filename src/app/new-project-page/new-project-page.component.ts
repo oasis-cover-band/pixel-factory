@@ -1,6 +1,13 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { ProjectNameService } from '../project-tools/project-name.service';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  Router
+} from '@angular/router';
+import {
+  ProjectNameService
+} from '../project-tools/project-name.service';
 
 @Component({
   selector: 'app-new-project-page',
@@ -12,10 +19,9 @@ export class NewProjectPageComponent implements OnInit {
   constructor(
     private router: Router,
     public nameService: ProjectNameService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addLayers(): void {
     this.router.navigateByUrl('add-layers');

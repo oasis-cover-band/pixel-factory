@@ -1,9 +1,22 @@
-import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
-import { Layer } from './layer-item/layer.model';
-import { LayersService } from '../project-tools/layers.service';
-import { ProjectNameService } from '../project-tools/project-name.service';
-import { fadeAnimations } from 'src/animations';
+import {
+  Component,
+  OnInit
+} from '@angular/core';
+import {
+  Router
+} from '@angular/router';
+import {
+  Layer
+} from './layer-item/layer.model';
+import {
+  LayersService
+} from '../project-tools/layers.service';
+import {
+  ProjectNameService
+} from '../project-tools/project-name.service';
+import {
+  fadeAnimations
+} from 'src/animations';
 
 @Component({
   selector: 'app-add-layers-page',
@@ -17,16 +30,15 @@ export class AddLayersPageComponent implements OnInit {
     private router: Router,
     public layersService: LayersService,
     public nameService: ProjectNameService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   addLayer(): void {
     const newLayer: Layer = {
       name: 'New Layer ' + this.layersService.projectLayers.length,
       variations: [
-        
+
       ],
       storeForRarity: true
     };

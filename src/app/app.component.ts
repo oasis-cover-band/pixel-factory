@@ -1,5 +1,9 @@
-import { Component } from '@angular/core';
-import { routerAnimations } from 'src/animations';
+import {
+  Component
+} from '@angular/core';
+import {
+  routerAnimations
+} from 'src/animations';
 
 @Component({
   selector: 'app-root',
@@ -8,5 +12,4 @@ import { routerAnimations } from 'src/animations';
   animations: [routerAnimations]
 })
 export class AppComponent {
-  title = 'pixel-factory';
 }

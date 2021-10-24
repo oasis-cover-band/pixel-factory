@@ -1,9 +1,25 @@
-import { Component, OnInit, Input, ViewChild, ElementRef } from '@angular/core';
-import { Layer } from './layer.model';
-import { Variation } from './item-variation/variation.model';
-import { Router } from '@angular/router';
-import { UploaderService } from 'src/app/tools/uploader.service';
-import { LayersService } from 'src/app/project-tools/layers.service';
+import {
+  Component,
+  OnInit,
+  Input,
+  ViewChild,
+  ElementRef
+} from '@angular/core';
+import {
+  Layer
+} from './layer.model';
+import {
+  Variation
+} from './item-variation/variation.model';
+import {
+  Router
+} from '@angular/router';
+import {
+  UploaderService
+} from 'src/app/tools/uploader.service';
+import {
+  LayersService
+} from 'src/app/project-tools/layers.service';
 
 @Component({
   selector: 'app-layer-item',
@@ -14,7 +30,7 @@ export class LayerItemComponent implements OnInit {
 
   @Input() data!: Layer;
   @Input() index!: number;
-  @ViewChild('nameInputElement') nameInputElement!: ElementRef<any>;
+  @ViewChild('nameInputElement') nameInputElement!: ElementRef < any > ;
 
   isUploading: boolean = false;
   progress: number = 0;
@@ -23,10 +39,9 @@ export class LayerItemComponent implements OnInit {
     private layersService: LayersService,
     private router: Router,
     private uploaderService: UploaderService
-  ) { }
+  ) {}
 
-  ngOnInit(): void {
-  }
+  ngOnInit(): void {}
 
   saveName(): void {
     this.layersService.projectLayers[this.index].name = this.nameInputElement.nativeElement.value;
@@ -66,12 +81,12 @@ export class LayerItemComponent implements OnInit {
 
   uploadFile(event: any) {
 
-    const file:File = event.target.files[0];
+    const file: File = event.target.files[0];
 
     if (file) {
 
-        console.dir(file);
-        
+      console.dir(file);
+
       const reader = new FileReader();
       reader.readAsDataURL(file);
 
@@ -87,8 +102,8 @@ export class LayerItemComponent implements OnInit {
           ]
         };
         this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
-        
-        
+
+
         this.progress = 0;
         this.isUploading = true;
 
@@ -98,5 +113,5 @@ export class LayerItemComponent implements OnInit {
         });
       };
     }
-}
+  }
 }
