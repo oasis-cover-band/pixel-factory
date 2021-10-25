@@ -1,1 +1,20 @@
-<p>generation-settings-page works!</p>
+<h4>
+  GENERATING SETTINGS FOR
+  <small>{{projectService.projectName}}</small>
+</h4>
+
+<label>Mint Amount</label>
+<input #mintAmountInputElement placeholder="NFT Item Name" [value]="this.projectService.mintAmount"
+  (change)="saveMintAmount()" />
+<label>Generation Delay</label>
+<input #timeBetweenGenerationsInputElement placeholder="NFT Item Name"
+  [value]="this.projectService.timeBetweenGenerations" (change)="saveTimeBetweenGenerations()" />
+<!-- <label>Centralized Server Location</label>
+  <input #centralizedServerLocationInputElement placeholder="NFT Item Name" [value]="this.projectService.centralizedServerLocation" (change)="saveCentralizedServerLocation()" /> -->
+
+
+<button class="back-project" (click)="backToProject()">
+  <span>
+    BACK TO PROJECT
+  </span>
+</button>

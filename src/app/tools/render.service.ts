@@ -36,6 +36,7 @@ export class RenderService {
   private async compileSVGImage(compiledImage: BehaviorSubject<string>, SVGid: number, SVGElement: ElementRef): Promise<any> {
     await compiledImage.next(await compiledImage.getValue().concat('<g id="' + await SVGid +  '">'));
     let compiledLayers: BehaviorSubject<string>[] = await [];
+    console.dir(this.projectService.generatedItems[await SVGid]?.generatedLayers.length);
     await this.compileSVGLayers(await compiledLayers, await this.projectService.generatedItems[await SVGid]?.generatedLayers).then(async afterSVGLayersCompiliation => {
       await this.addSVGLayersToImage(await compiledLayers, await compiledImage).then(async afterLayersAddedToImage => {
         await compiledImage.next(await compiledImage.getValue().concat('</g>'));
@@ -49,7 +50,7 @@ export class RenderService {
   private async addSVGLayersToImage(compiledLayers: BehaviorSubject<string>[], compiledImage: BehaviorSubject<string>): Promise < any > {
     console.dir(compiledLayers.length);
     await compiledLayers?.forEach((compiledLayer: BehaviorSubject<string>) => {
-      console.dir(compiledLayer.getValue());
+      console.dir(compiledLayers.length);
       compiledImage.next(compiledImage.getValue().concat(compiledLayer.getValue()));
     });
   }

@@ -7,7 +7,10 @@
  'start': started === false,
  'generating': started === true && this.finished === false
 }" (click)="startGeneration()" *ngIf="started === false || this.finished === false">
-  <span *ngIf="started === false">
+  <span *ngIf="setup === false && started === false">
+    SETUP
+  </span>
+  <span *ngIf="setup === true && started === false">
     START
   </span>
   <span *ngIf="started === true && this.finished === false">
@@ -18,10 +21,7 @@
   </span>
 </button>
 
-<button 
-class="save"
-*ngIf="started === true && this.finished === true"
-(click)="saveCollection()">
+<button class="save" *ngIf="started === true && this.finished === true" (click)="saveCollection()">
   <span>
     SAVE
   </span>
@@ -42,7 +42,7 @@ class="save"
 </div>
 
 
-<h6>
+<!-- <h6>
   <span *ngIf="started === false">
     START GENERATING...
   </span>
@@ -52,7 +52,7 @@ class="save"
   <span *ngIf="started === true && this.finished === true">
     SAVE YOUR COLLECTION
   </span>
-</h6>
+</h6> -->
 
 <button class="back-project" (click)="backToProject()">
   <span>

@@ -1,25 +1,38 @@
 <h4>
-    EDITING SETTINGS FOR
-    <small>{{projectService.projectName}}</small>
+  EDITING SETTINGS FOR
+  <small>{{projectService.projectName}}</small>
 </h4>
 
-<input #itemsNameInputElement placeholder="NFT Item Name" [value]="this.projectService.itemsName" (change)="saveItemsName()" />
-<input #projectNameInputElement placeholder="Project Name" [value]="this.projectService.projectName" (change)="saveProjectName()" />
-<input #collectionNameInputElement placeholder="Collection Name" [value]="this.projectService.collectionName" (change)="saveCollectionName()" />
-<input #collectionFamilyNameInputElement placeholder="Collection Family Name" [value]="this.projectService.collectionFamilyName" (change)="saveCollectionFamilyName()" />
-<input #collectionSymbolInputElement placeholder="Collection Symbol" [value]="this.projectService.collectionSymbol" (change)="saveCollectionSymbol()" />
-<input #projectWebsiteInputElement placeholder="Project Website" [value]="this.projectService.projectWebsite" (change)="saveProjectWebsite()" />
-
-<input #sellerFeeBasisPointInputElement placeholder="Seller Fee Basis Point" [value]="this.projectService.sellerFeeBasisPoint" (change)="saveSellerFeeBasisPoint()" />
+<label>Items Name</label>
+<input #itemsNameInputElement placeholder="NFT Item Name" [value]="this.projectService.itemsName"
+  (change)="saveItemsName()" />
+<label>Project Name</label>
+<input #projectNameInputElement placeholder="Project Name" [value]="this.projectService.projectName"
+  (change)="saveProjectName()" />
+<label>Collection Name</label>
+<input #collectionNameInputElement placeholder="Collection Name" [value]="this.projectService.collectionName"
+  (change)="saveCollectionName()" />
+<label>Collection Family Name</label>
+<input #collectionFamilyNameInputElement placeholder="Collection Family Name"
+  [value]="this.projectService.collectionFamilyName" (change)="saveCollectionFamilyName()" />
+<label>Collection Symbol</label>
+<input #collectionSymbolInputElement placeholder="Collection Symbol" [value]="this.projectService.collectionSymbol"
+  (change)="saveCollectionSymbol()" />
+<label>Project Website</label>
+<input #projectWebsiteInputElement placeholder="Project Website" [value]="this.projectService.projectWebsite"
+  (change)="saveProjectWebsite()" />
+<label>Seller Fee Basis Point</label>
+<input #sellerFeeBasisPointInputElement placeholder="Seller Fee Basis Point"
+  [value]="this.projectService.sellerFeeBasisPoint" (change)="saveSellerFeeBasisPoint()" />
 <span class="creator-shares-table">
-    <h3>CREATOR SHARES <b class="clickable" (click)="addCreatorShare()">+</b></h3>
-    <ng-container *ngFor="let creatorShare of projectService.creatorShares; let index = index">
-        <app-creator-share [index]="index" [data]="creatorShare"></app-creator-share>
-    </ng-container>
+  <h3>CREATOR SHARES <b class="clickable" (click)="addCreatorShare()">+</b></h3>
+  <ng-container *ngFor="let creatorShare of projectService.creatorShares; let index = index">
+    <app-creator-share [index]="index" [data]="creatorShare"></app-creator-share>
+  </ng-container>
 </span>
 
 <button class="back-project" (click)="backToProject()">
-    <span>
-        BACK TO PROJECT
-    </span>
+  <span>
+    BACK TO PROJECT
+  </span>
 </button>

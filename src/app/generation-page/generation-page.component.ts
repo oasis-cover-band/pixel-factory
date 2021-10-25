@@ -17,6 +17,7 @@ export class GenerationPageComponent implements OnInit, AfterContentInit {
   @ViewChild('canvasElement') canvasElement!: ElementRef<HTMLCanvasElement>;
 
   started: boolean = false;
+  setup: boolean = false;
   paused: boolean = false // todo;
   finished: boolean = false;
   generating!: number;
@@ -35,18 +36,22 @@ export class GenerationPageComponent implements OnInit, AfterContentInit {
   }
 
   async startGeneration(): Promise<any> {
-    if (await this.started === true) {
-      return;
-    } else {
-      this.started = await true;
-    }
+    if (await this.setup === true) {
+      if (await this.started === true) {
+        return;
+      } else {
+        this.started = await true;
+      }
+  } else {
+    this.setup = await true;
+  }
     for (let SVGid = 0; SVGid < this.projectService.mintAmount; SVGid++) {
       setTimeout(async () => {
       this.generating = SVGid;
       await this.generateSVG(SVGid).then(afterGeneration => {
         setTimeout(async () => {
           await this.destroySVG(SVGid);
-          if (SVGid === this.projectService.mintAmount) {
+          if (SVGid === this.projectService.mintAmount - 1) {
             this.finished = true;
           }
         }, (this.projectService.timeBetweenGenerations * 1000) - 1000);
@@ -57,7 +62,9 @@ export class GenerationPageComponent implements OnInit, AfterContentInit {
 
   async generateSVG(SVGid: number): Promise<any> {
     await this.generationService.generateSVG(await SVGid).then(async (after) => {
-      await this.renderService.renderSVG(await SVGid, await this.SVGElement);
+      if (this.setup === true) {
+        await this.renderService.renderSVG(await SVGid, await this.SVGElement);
+      }
     });
   }
 
