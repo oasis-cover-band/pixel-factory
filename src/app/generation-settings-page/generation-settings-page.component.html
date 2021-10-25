@@ -6,7 +6,7 @@
 <label>Mint Amount</label>
 <input #mintAmountInputElement placeholder="NFT Item Name" [value]="this.projectService.mintAmount"
   (change)="saveMintAmount()" />
-<label>Generation Delay</label>
+<label>Generation Delay <small>IN SECONDS</small></label>
 <input #timeBetweenGenerationsInputElement placeholder="NFT Item Name"
   [value]="this.projectService.timeBetweenGenerations" (change)="saveTimeBetweenGenerations()" />
 <!-- <label>Centralized Server Location</label>

@@ -5,9 +5,7 @@ import {
 import {
   Router
 } from '@angular/router';
-import {
-  ProjectNameService
-} from '../project-tools/project-name.service';
+import { ProjectService } from '../project-tools/project.service';
 
 @Component({
   selector: 'app-new-project-page',
@@ -18,7 +16,7 @@ export class NewProjectPageComponent implements OnInit {
 
   constructor(
     private router: Router,
-    public nameService: ProjectNameService
+    public projectService: ProjectService
   ) {}
 
   ngOnInit(): void {}

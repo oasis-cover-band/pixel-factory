@@ -12,11 +12,9 @@ import {
   LayersService
 } from '../project-tools/layers.service';
 import {
-  ProjectNameService
-} from '../project-tools/project-name.service';
-import {
   fadeAnimations
 } from 'src/animations';
+import { ProjectService } from '../project-tools/project.service';
 
 @Component({
   selector: 'app-add-layers-page',
@@ -29,7 +27,7 @@ export class AddLayersPageComponent implements OnInit {
   constructor(
     private router: Router,
     public layersService: LayersService,
-    public nameService: ProjectNameService
+    public projectService: ProjectService
   ) {}
 
   ngOnInit(): void {}

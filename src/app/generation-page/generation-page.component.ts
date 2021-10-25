@@ -3,7 +3,6 @@ import { ProjectService } from '../project-tools/project.service';
 import { GenerationService } from '../tools/generation.service';
 import { RenderService } from '../tools/render.service';
 import { Router } from '@angular/router';
-import { ProjectNameService } from '../project-tools/project-name.service';
 import { BehaviorSubject } from 'rxjs';
 
 @Component({
@@ -22,11 +21,10 @@ export class GenerationPageComponent implements OnInit, AfterContentInit {
   finished: boolean = false;
   generating!: number;
   constructor(
-    private projectService: ProjectService,
+    public projectService: ProjectService,
     private generationService: GenerationService,
     private renderService: RenderService,
     private router: Router,
-    public projectNameService: ProjectNameService
   ) { }
 
   ngOnInit(): void {
@@ -36,15 +34,11 @@ export class GenerationPageComponent implements OnInit, AfterContentInit {
   }
 
   async startGeneration(): Promise<any> {
-    if (await this.setup === true) {
-      if (await this.started === true) {
-        return;
-      } else {
-        this.started = await true;
-      }
-  } else {
-    this.setup = await true;
-  }
+    if (await this.started === true) {
+      return;
+    } else {
+      this.started = await true;
+    }
     for (let SVGid = 0; SVGid < this.projectService.mintAmount; SVGid++) {
       setTimeout(async () => {
       this.generating = SVGid;
