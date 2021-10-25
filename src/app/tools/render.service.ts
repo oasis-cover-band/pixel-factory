@@ -37,18 +37,28 @@ export class RenderService {
     await compiledImage.next(await compiledImage.getValue().concat('<g id="' + await SVGid +  '">'));
     let compiledLayers: BehaviorSubject<string>[] = await [];
     await this.compileSVGLayers(await compiledLayers, await this.projectService.generatedItems[await SVGid]?.generatedLayers).then(async afterSVGLayersCompiliation => {
-      await compiledImage.next(await compiledImage.getValue().concat('</g>'));
-      await this.paintSVGToElement(await SVGElement, await compiledImage).then(afterPainting => {
-
+      this.addSVGLayersToImage(await compiledLayers, await compiledImage).then(async afterLayersAddedToImage => {
+        await compiledImage.next(await compiledImage.getValue().concat('</g>'));
+        await this.paintSVGToElement(await SVGElement, await compiledImage).then(afterPainting => {
+  
+        });
       });
     });
   }
 
-  private async compileSVGLayers(compiledImage: BehaviorSubject<string>, generatedItemsLayers: GeneratedItemLayer[]): Promise<any> {
+  private async addSVGLayersToImage(compiledLayers: BehaviorSubject<string>[], compiledImage: BehaviorSubject<string>): Promise < any > {
+    await compiledLayers.forEach(async (compiledLayer: BehaviorSubject<string>) => {
+      await compiledImage.next(await compiledImage.getValue().concat(await compiledLayer.getValue()));
+    });
+  }
+
+  private async compileSVGLayers(compiledLayers: BehaviorSubject<string>[], generatedItemsLayers: GeneratedItemLayer[]): Promise<any> {
     await generatedItemsLayers?.forEach(async (generatedItemLayer: GeneratedItemLayer) => {
-      await compiledImage.next(await compiledImage.getValue().concat(await '<g color="' + this.color[Math.floor(Math.random() * this.color.length)].value + '">'));
-      await compiledImage.next(await compiledImage.getValue().concat(await String(await generatedItemLayer.value)));
-      await compiledImage.next(await compiledImage.getValue().concat(await '</g>'));
+      const compiledLayer = await new BehaviorSubject(``);
+      await compiledLayer.next(await compiledLayer.getValue().concat(await '<g color="' + this.color[Math.floor(Math.random() * this.color.length)].value + '">'));
+      await compiledLayer.next(await compiledLayer.getValue().concat(await String(await generatedItemLayer.value)));
+      await compiledLayer.next(await compiledLayer.getValue().concat(await '</g>'));
+      await compiledLayers.push(await compiledLayer);
     });
   }
 
