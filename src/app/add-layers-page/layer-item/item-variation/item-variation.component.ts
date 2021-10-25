@@ -30,6 +30,7 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
   @Input() index!: number;
   @Input() layerIndex!: number;
   @ViewChild('nameInputElement') nameInputElement!: ElementRef < any > ;
+  @ViewChild('rarityInputElement') rarityInputElement!: ElementRef < any > ;
   @ViewChild('SVGVariationElement') SVGVariationElement!: ElementRef < any > ;
   SVGString!: BehaviorSubject < string | ArrayBuffer | null > ;
 
@@ -51,6 +52,10 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
 
   saveName(): void {
     this.layersService.projectLayers[this.layerIndex].variations[this.index].name = this.nameInputElement.nativeElement.value;
+  }
+
+  saveRarity(): void {
+    this.layersService.projectLayers[this.layerIndex].variations[this.index].rarity = this.rarityInputElement.nativeElement.value;
   }
 
   remove(): void {

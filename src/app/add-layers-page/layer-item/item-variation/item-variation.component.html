@@ -8,6 +8,8 @@
 
 <input #nameInputElement placeholder="Layer Variation Name" [value]="this.data.name" (change)="saveName()" />
 
+<input #rarityInputElement placeholder="Layer Rarity" [value]="this.data.rarity" (change)="saveRarity()" />
+
 <button class="change-file" (click)="fileUpload.click()">
     <span>
         <small>CHANGE FILE</small>

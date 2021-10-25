@@ -4,7 +4,7 @@ import { FileService } from './file.service';
 import { Layer } from '../add-layers-page/layer-item/layer.model';
 import { GeneratedItemLayer } from '../project-output/generated-item-layer.model';
 import { Variation } from '../add-layers-page/layer-item/item-variation/variation.model';
-import { Subscription } from 'rxjs';
+import { Subscription, BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -30,35 +30,44 @@ export class GenerationService {
         // ASSIGN A DEFAULT LAYER
         // INCASE NONE OF THE PROBABILITIES
         // ARE A "HIT"
-        const generatedItemLayerToAdd: GeneratedItemLayer = await {
+        let generatedItemLayerToAdd: GeneratedItemLayer = await {
           layer: await layerInProject.name,
           variation: await layerInProject.variations[0].name,
           value: await layerInProject.variations[0].data
         };
         // ITERATE THROUGH RARITIES
-        let rarityMatch = await false;
+        let rarityMatch: BehaviorSubject<boolean> = new BehaviorSubject<boolean>(false);
         // TO FIND WHICH VARIATION TO APPLY
         // IN THE LAYER
-        await layerInProject.variations.forEach(async (variation: Variation) => {
-          if (rarityMatch === true) {
-            return;
-          }
-          if (Math.random() <= variation.rarity) {
-            rarityMatch = await true;
-            generatedItemLayerToAdd.variation = await variation.name;
-            generatedItemLayerToAdd.value = await variation.data;
+        this.iterateThroughLayerVariations(layerInProject, generatedItemLayerToAdd, rarityMatch).then(async afterIterating => {
+          if (await this.projectService.generatedItems[SVGid]) {
+            await this.projectService.generatedItems[SVGid]?.generatedLayers?.push(await generatedItemLayerToAdd);
+          } else {
+            this.projectService.generatedItems[SVGid] = await {
+              image0: '',
+              image1: '',
+              metadata: [],
+              generatedLayers: [await generatedItemLayerToAdd]
+            };
           }
         });
 
-        if (await this.projectService.generatedItems[SVGid]) {
-          await this.projectService.generatedItems[SVGid]?.generatedLayers?.push(await generatedItemLayerToAdd);
-        } else {
-          this.projectService.generatedItems[SVGid] = await {
-            image0: '',
-            image1: '',
-            metadata: [],
-            generatedLayers: [await generatedItemLayerToAdd]
-          };
+    });
+  }
+
+  async iterateThroughLayerVariations(layerInProject: Layer, generatedItemLayerToAdd: GeneratedItemLayer, rarityMatch: BehaviorSubject<boolean>): Promise<any> {
+    await layerInProject.variations.forEach(async (variation: Variation, index: number) => {
+        if (await rarityMatch.getValue() === true) {
+          return;
+        }
+        console.dir(rarityMatch.getValue());
+        console.dir(variation.rarity);
+        console.dir((Math.random() * 100));
+        if (Math.floor((Math.random() * 100)) <= variation.rarity) {
+          rarityMatch.next(true);
+          console.dir(rarityMatch.getValue());
+          generatedItemLayerToAdd.variation = await variation.name;
+          generatedItemLayerToAdd.value = await variation.data;
         }
     });
   }
