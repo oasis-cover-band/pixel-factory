@@ -41,7 +41,7 @@ export class RenderService {
 
   private async compileSVGLayers(compiledImage: BehaviorSubject<string>, generatedItemsLayers: GeneratedItemLayer[]): Promise<any> {
     await generatedItemsLayers?.forEach(async (generatedItemLayer: GeneratedItemLayer) => {
-      await compiledImage.next(await compiledImage.getValue().concat(await generatedItemLayer.value));
+      await compiledImage.next(await compiledImage.getValue().concat(await String(generatedItemLayer.value)));
     });
   }
 

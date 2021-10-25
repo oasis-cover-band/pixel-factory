@@ -26,14 +26,14 @@ export class GenerationService {
       await this.raritySubscription?.unsubscribe();
     }
     await this.projectService.projectLayers.forEach(async (layerInProject: Layer) => {
-      this.defaultSubscription = await this.fileService.getText(layerInProject.variations[0].file).subscribe(async defaultOutput => {
+      
         // ASSIGN A DEFAULT LAYER
         // INCASE NONE OF THE PROBABILITIES
         // ARE A "HIT"
         const generatedItemLayerToAdd: GeneratedItemLayer = await {
           layer: await layerInProject.name,
           variation: await layerInProject.variations[0].name,
-          value: await defaultOutput
+          value: await layerInProject.variations[0].data
         };
         // ITERATE THROUGH RARITIES
         let rarityMatch = await false;
@@ -46,9 +46,7 @@ export class GenerationService {
           if (Math.random() <= variation.rarity) {
             rarityMatch = await true;
             generatedItemLayerToAdd.variation = await variation.name;
-            this.raritySubscription = await this.fileService.getText(variation.file).subscribe(async (rarityOutput) => {
-              generatedItemLayerToAdd.value = await rarityOutput;
-            });
+            generatedItemLayerToAdd.value = await variation.data;
           }
         });
 
@@ -62,7 +60,6 @@ export class GenerationService {
             generatedLayers: [await generatedItemLayerToAdd]
           };
         }
-      })
-    })
+    });
   }
 }

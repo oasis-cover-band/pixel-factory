@@ -69,4 +69,8 @@ export class GenerationPageComponent implements OnInit, AfterContentInit {
     this.router.navigateByUrl('start-new-project');
   }
 
+  async saveCollection(): Promise<any> {
+
+  }
+
 }

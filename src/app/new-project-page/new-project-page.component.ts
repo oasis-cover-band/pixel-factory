@@ -27,6 +27,10 @@ export class NewProjectPageComponent implements OnInit {
     this.router.navigateByUrl('add-layers');
   }
 
+  generationSettings(): void {
+    this.router.navigateByUrl('generation-settings');
+  }
+
   generate(): void {
     this.router.navigateByUrl('generate');
   }

@@ -3,7 +3,8 @@ export class Variation {
     file!: File;
     size!: number;
     type!: string;
-    thumbnail!: string | ArrayBuffer | null; 
+    thumbnail!: string | ArrayBuffer | null;
+    data!: string | ArrayBuffer | null;  
     colors!: number[];
     rarity!: number;
 }

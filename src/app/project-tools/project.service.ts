@@ -40,8 +40,7 @@ export class ProjectService {
   public includeExternalCSS: boolean = false;
   public externalCSSLink: string = '';
   public sellerFeeBasisPoint = 10;
-  public mintAmount = 100;
-  public timeToDisplayGeneratedImage = 1;
+  public mintAmount = 10;
   public timeBetweenGenerations = 10;
   public collectionName = 'New Collection Name';
   public collectionSymbol = 'NCS';

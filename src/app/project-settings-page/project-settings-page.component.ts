@@ -23,8 +23,11 @@ export class ProjectSettingsPageComponent implements OnInit {
 
   @ViewChild('itemsNameInputElement') itemsNameInputElement!: ElementRef < any > ;
   @ViewChild('projectNameInputElement') projectNameInputElement!: ElementRef < any > ;
+  @ViewChild('collectionSymbolInputElement') collectionSymbolInputElement!: ElementRef < any > ;
+  @ViewChild('projectWebsiteInputElement') projectWebsiteInputElement!: ElementRef < any > ;
   @ViewChild('collectionNameInputElement') collectionNameInputElement!: ElementRef < any > ;
   @ViewChild('collectionFamilyNameInputElement') collectionFamilyNameInputElement!: ElementRef < any > ;
+  @ViewChild('sellerFeeBasisPointInputElement') sellerFeeBasisPointInputElement!: ElementRef < any > ;
 
   constructor(
     private router: Router,
@@ -47,6 +50,23 @@ export class ProjectSettingsPageComponent implements OnInit {
 
   saveCollectionFamilyName(): void {
     this.projectService.collectionFamilyName = this.collectionFamilyNameInputElement.nativeElement.value;
+  }
+
+  saveCollectionSymbol(): void {
+    this.projectService.collectionSymbol = this.collectionSymbolInputElement.nativeElement.value;
+  }
+
+  saveProjectWebsite(): void {
+    if (this.projectService.centralizedServerLocation === this.projectService.projectWebsite) {
+      this.projectService.centralizedServerLocation = this.projectWebsiteInputElement.nativeElement.value;
+      this.projectService.projectWebsite = this.projectWebsiteInputElement.nativeElement.value;
+    } else {
+      this.projectService.projectWebsite = this.projectWebsiteInputElement.nativeElement.value;
+    }
+  }
+
+  saveSellerFeeBasisPoint(): void {
+    this.projectService.sellerFeeBasisPoint = this.sellerFeeBasisPointInputElement.nativeElement.value;
   }
 
   addCreatorShare(): void {

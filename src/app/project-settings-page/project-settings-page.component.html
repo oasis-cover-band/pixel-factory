@@ -7,7 +7,10 @@
 <input #projectNameInputElement placeholder="Project Name" [value]="this.projectService.projectName" (change)="saveProjectName()" />
 <input #collectionNameInputElement placeholder="Collection Name" [value]="this.projectService.collectionName" (change)="saveCollectionName()" />
 <input #collectionFamilyNameInputElement placeholder="Collection Family Name" [value]="this.projectService.collectionFamilyName" (change)="saveCollectionFamilyName()" />
+<input #collectionSymbolInputElement placeholder="Collection Symbol" [value]="this.projectService.collectionSymbol" (change)="saveCollectionSymbol()" />
+<input #projectWebsiteInputElement placeholder="Project Website" [value]="this.projectService.projectWebsite" (change)="saveProjectWebsite()" />
 
+<input #sellerFeeBasisPointInputElement placeholder="Seller Fee Basis Point" [value]="this.projectService.sellerFeeBasisPoint" (change)="saveSellerFeeBasisPoint()" />
 <span class="creator-shares-table">
     <h3>CREATOR SHARES <b class="clickable" (click)="addCreatorShare()">+</b></h3>
     <ng-container *ngFor="let creatorShare of projectService.creatorShares; let index = index">

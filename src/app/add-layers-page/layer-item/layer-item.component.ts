@@ -104,6 +104,7 @@ export class LayerItemComponent implements OnInit {
         size: file.size,
         type: file.type,
         thumbnail: reader.result,
+        data: reader.result,
         colors: [
 
         ],
@@ -132,6 +133,7 @@ export class LayerItemComponent implements OnInit {
         size: file.size,
         type: file.type,
         thumbnail: reader.result,
+        data: reader.result,
         colors: [
 
         ],

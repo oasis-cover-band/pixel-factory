@@ -81,6 +81,7 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
         size: file.size,
         type: file.type,
         thumbnail: reader.result,
+        data: reader.result,
         colors: [
 
         ],
@@ -106,6 +107,7 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
         size: file.size,
         type: file.type,
         thumbnail: reader.result,
+        data: reader.result,
         colors: [
 
         ],

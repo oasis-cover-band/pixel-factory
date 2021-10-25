@@ -35,6 +35,8 @@ import {
 import {
   EditLayerVariationsPageComponent
 } from './add-layers-page/edit-layer-variations-page/edit-layer-variations-page.component';
+import { GenerationSettingsPageModule } from './generation-settings-page/generation-settings-page.module';
+import { GenerationSettingsPageComponent } from './generation-settings-page/generation-settings-page.component';
 import { GenerationPageModule } from './generation-page/generation-page.module';
 import { GenerationPageComponent } from './generation-page/generation-page.component';
 
@@ -59,6 +61,10 @@ const routes: Routes = [{
     component: EditLayerVariationsPageComponent
   },
   {
+    path: 'generation-settings',
+    component: GenerationSettingsPageComponent
+  },
+  {
     path: 'generate',
     component: GenerationPageComponent
   }
@@ -72,7 +78,8 @@ const routes: Routes = [{
     AddLayersPageModule,
     ProjectSettingsPageModule,
     EditLayerVariationsPageModule,
-    GenerationPageModule
+    GenerationPageModule,
+    GenerationSettingsPageModule
   ],
   exports: [RouterModule]
 })
