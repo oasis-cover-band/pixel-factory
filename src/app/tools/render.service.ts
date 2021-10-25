@@ -3,6 +3,7 @@ import { BehaviorSubject } from 'rxjs';
 import { ProjectService } from '../project-tools/project.service';
 import { Variation } from '../add-layers-page/layer-item/item-variation/variation.model';
 import { GeneratedItemLayer } from '../project-output/generated-item-layer.model';
+import { ColorService } from './color.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,7 +11,8 @@ import { GeneratedItemLayer } from '../project-output/generated-item-layer.model
 export class RenderService {
 
   constructor(
-    private projectService: ProjectService
+    private projectService: ProjectService,
+    private colorService: ColorService
   ) { }
 
   public async renderSVG(SVGid: number, SVGElement: ElementRef): Promise<any> {
@@ -41,8 +43,25 @@ export class RenderService {
 
   private async compileSVGLayers(compiledImage: BehaviorSubject<string>, generatedItemsLayers: GeneratedItemLayer[]): Promise<any> {
     await generatedItemsLayers?.forEach(async (generatedItemLayer: GeneratedItemLayer) => {
-      await compiledImage.next(await compiledImage.getValue().concat(await String(generatedItemLayer.value)));
+      await this.colorSVGLayer(compiledImage, generatedItemLayer).then(async afterColoringSVGLayer => {
+        await compiledImage.next(await compiledImage.getValue().concat(await String(generatedItemLayer.value)));
+        await this.closeSVGLayer(compiledImage).then(async afterClosingSVGLayer => {
+
+        })
+      });
     });
+  }
+
+  private async colorSVGLayer(compiledImage: BehaviorSubject<string>, generatedItemLayer: GeneratedItemLayer): Promise<any> {
+    await compiledImage.next(await compiledImage.getValue().concat(await '<g id="' + await generatedItemLayer.variation + '" class="' + await generatedItemLayer.layer + '" color="' + await this.chooseVariationColor() + '">'));
+  }
+
+  private async closeSVGLayer(compiledImage: BehaviorSubject<string>): Promise<any> {
+    await compiledImage.next(await compiledImage.getValue().concat(await '</g>'));
+  }
+
+  private async chooseVariationColor(): Promise<string> {
+    return await this.colorService.availableColors[Math.floor(Math.random() * this.colorService.availableColors.length) % this.colorService.availableColors.length ].value
   }
 
   private async paintSVGToElement(SVGElement: ElementRef,compiledImage: BehaviorSubject<string>) {
