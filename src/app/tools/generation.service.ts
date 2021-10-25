@@ -60,12 +60,8 @@ export class GenerationService {
         if (await rarityMatch.getValue() === true) {
           return;
         }
-        console.dir(rarityMatch.getValue());
-        console.dir(variation.rarity);
-        console.dir((Math.random() * 100));
         if (Math.floor((Math.random() * 100)) <= variation.rarity) {
           rarityMatch.next(true);
-          console.dir(rarityMatch.getValue());
           generatedItemLayerToAdd.variation = await variation.name;
           generatedItemLayerToAdd.value = await variation.data;
         }
