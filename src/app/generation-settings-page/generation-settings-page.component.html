@@ -9,9 +9,60 @@
 <label>Generation Delay <small>IN SECONDS</small></label>
 <input #timeBetweenGenerationsInputElement placeholder="NFT Item Name"
   [value]="this.projectService.timeBetweenGenerations" (change)="saveTimeBetweenGenerations()" />
-<!-- <label>Centralized Server Location</label>
-  <input #centralizedServerLocationInputElement placeholder="NFT Item Name" [value]="this.projectService.centralizedServerLocation" (change)="saveCentralizedServerLocation()" /> -->
 
+<label *ngIf="this.projectService.storeOnCentralizedServer === true">Centralized Server Location</label>
+<input *ngIf="this.projectService.storeOnCentralizedServer === true" #centralizedServerLocationInputElement
+  placeholder="Centralized Server Location" [value]="this.projectService.centralizedServerLocation"
+  (change)="saveCentralizedServerLocation()" />
+
+  <span class="check-box store-on-centralized-server">
+    <span>
+      <small>
+        Centralized?
+      </small>
+    </span>
+    <button class=" clickable" (click)="toggleStoreOnCentralizedServer()">
+      <span class="clickable" *ngIf="this.projectService.storeOnCentralizedServer === true">
+        ✓
+      </span>
+    </button>
+  </span>
+<span *ngIf="this.projectService.uploadAsSVG === true" class="check-box print-as-png">
+  <span>
+    <small>
+      PRINT AS PNG?
+    </small>
+  </span>
+  <button class=" clickable" (click)="togglePrintAsPNG()">
+    <span class="clickable" *ngIf="this.projectService.printAsPNG === true">
+      ✓
+    </span>
+  </button>
+</span>
+<span *ngIf="this.projectService.uploadAsSVG === true" class="check-box print-as-svg">
+  <span>
+    <small>
+      PRINT AS SVG?
+    </small>
+  </span>
+  <button class=" clickable" (click)="togglePrintAsSVG()">
+    <span class="clickable" *ngIf="this.projectService.printAsSVG === true">
+      ✓
+    </span>
+  </button>
+</span>
+<span *ngIf="this.projectService.uploadAsSVG === true" class="check-box print-as-html">
+  <span>
+    <small>
+      PRINT AS HTML?
+    </small>
+  </span>
+  <button class=" clickable" (click)="togglePrintAsHTML()">
+    <span class="clickable" *ngIf="this.projectService.printAsHTML === true">
+      ✓
+    </span>
+  </button>
+</span>
 
 <button class="back-project" (click)="backToProject()">
   <span>

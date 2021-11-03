@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { ProjectService } from '../project-tools/project.service';
-import { FileService } from './file.service';
 import { Layer } from '../add-layers-page/layer-item/layer.model';
 import { GeneratedItemLayer } from '../project-output/generated-item-layer.model';
 import { Variation } from '../add-layers-page/layer-item/item-variation/variation.model';
@@ -12,8 +11,7 @@ import { Subscription, BehaviorSubject } from 'rxjs';
 export class GenerationService {
 
   constructor(
-    private projectService: ProjectService,
-    private fileService: FileService
+    private projectService: ProjectService
   ) { }
 
   defaultSubscription!: Subscription;
@@ -52,6 +50,7 @@ export class GenerationService {
                 image0: '',
                 image1: '',
                 metadata: [],
+                json: '',
                 generatedLayers: [await generatedItemLayerToAdd]
               };
               console.dir(this.projectService.generatedItems[SVGid].generatedLayers.length);

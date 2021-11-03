@@ -31,20 +31,25 @@ export class RarityCompilerService {
 
   async setCollectionCount(): Promise < any > {
     await this.projectService.generatedItems.forEach(async (generatedItem: GeneratedItem) => {
-      await generatedItem.generatedLayers.forEach(
-        async (generatedLayer: GeneratedItemLayer) => {
+      generatedItem.generatedLayers.forEach(
+        (generatedLayer: GeneratedItemLayer) => {
           if (!this.collectionStatistics || this.collectionStatistics === undefined) {
-            this.collectionStatistics = await {};
+            this.collectionStatistics = {};
           }
 
           if (!this.collectionStatistics[generatedLayer.layer] || this.collectionStatistics[generatedLayer.layer] === undefined) {
-            this.collectionStatistics[generatedLayer.layer] = await {};
+            this.collectionStatistics[generatedLayer.layer] = {};
           }
 
           if (!this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] || this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] === undefined) {
-            this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] = await 1;
+            if (this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] >= 1) {
+              this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] = 
+              this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] + 1;
+            } else {
+              this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] = 1;
+            }
           } else {
-            this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] = await
+            this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] = 
             this.collectionStatistics[generatedLayer.layer][generatedLayer.variation] + 1;
           }
         });

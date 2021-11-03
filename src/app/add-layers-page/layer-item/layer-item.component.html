@@ -38,7 +38,7 @@
         <small>ADD VARIATION</small> +
     </span>
     <input type="file" class="file-input"
-    (change)="uploadVariationFile($event)" #fileUpload />
+    (change)="uploadVariationFile($event)" multiple #fileUpload />
 </button>
 
 <button class="remove"  (click)="remove()">

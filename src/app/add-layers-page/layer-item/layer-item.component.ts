@@ -80,16 +80,33 @@ export class LayerItemComponent implements OnInit {
   }
 
   async uploadVariationFile(event: any) {
+    if (event.target.files.length > 1) {
 
-    const file: File = await event.target.files[0];
+      for (let fileIndex = 0; fileIndex < event.target.files.length; fileIndex++) {
 
-    if (await file) {
+        const file: File = await event.target.files[fileIndex];
 
-      const reader = await new FileReader();
-      if (await file.type !== 'image/svg+xml') {
-        await this.doPNG(await reader, await file);
-      } else if (await file.type === 'image/svg+xml') {
-        await this.doSVG(await reader, await file);
+        if (await file) {
+
+          const reader = await new FileReader();
+          if (await file.type !== 'image/svg+xml') {
+            await this.doPNG(await reader, await file);
+          } else if (await file.type === 'image/svg+xml') {
+            await this.doSVG(await reader, await file);
+          }
+        }
+      }} else {
+
+      const file: File = await event.target.files[0];
+  
+      if (await file) {
+  
+        const reader = await new FileReader();
+        if (await file.type !== 'image/svg+xml') {
+          await this.doPNG(await reader, await file);
+        } else if (await file.type === 'image/svg+xml') {
+          await this.doSVG(await reader, await file);
+        }
       }
     }
   }
@@ -108,7 +125,7 @@ export class LayerItemComponent implements OnInit {
         colors: [
 
         ],
-        rarity: 0
+        rarity: 10
       };
       this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
 
@@ -137,7 +154,7 @@ export class LayerItemComponent implements OnInit {
         colors: [
 
         ],
-        rarity: 0
+        rarity: 10
       };
       this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
 

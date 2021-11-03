@@ -15,14 +15,14 @@ import { GeneratedItemLayer } from '../project-output/generated-item-layer.model
 })
 export class ProjectService {
 
-  public projectName = 'New Project Name';
-  public projectWebsite = 'https://yourwebsite.com';
+  public projectName: string = 'New Project Name';
+  public projectWebsite: string = 'https://yourwebsite.com';
   public creatorShares: CreatorShare[] = [{
     address: 'SOLFLR15asd9d21325bsadythp547912501b',
     share: 100
   }];
-  public itemsName = 'Individual Item Name';
-  public standardItemsDescription = 'Items Description';
+  public itemsName: string = 'Individual Item Name';
+  public standardItemsDescription: string = 'Items Description';
   public dynamicItemsName: boolean = false;
   public dynamicItemsDescription: boolean = false;
   public dynamicItemsNameString: string[] = [] // dynamically add via settings user chooses
@@ -33,19 +33,19 @@ export class ProjectService {
   public nameItemsAsElfRaces: boolean = true; // dynamic names options
   public nameItemsFirstAndLast: boolean = true; // dynamic names options
   public uploadAsPNG: boolean = false; // options
-  public uploadAsSVG: boolean = false; // options
+  public uploadAsSVG: boolean = true; // options
   public printAsPNG: boolean = true; // options
   public printAsSVG: boolean = true; // options
-  public printAsHTML: boolean = true;
+  public printAsHTML: boolean = false;
   public includeExternalCSS: boolean = false;
   public externalCSSLink: string = '';
-  public sellerFeeBasisPoint = 10;
-  public mintAmount = 10;
-  public timeBetweenGenerations = 10;
-  public collectionName = 'New Collection Name';
-  public collectionSymbol = 'NCS';
-  public collectionFamilyName = 'Collection Family Name';
-  public centralizedServerLocation = 'https://yourwebsite.com';
+  public sellerFeeBasisPoint: number = 10;
+  public mintAmount: number = 10;
+  public timeBetweenGenerations: number = 10;
+  public collectionName: string = 'New Collection Name';
+  public collectionSymbol: string = 'NCS';
+  public collectionFamilyName: string = 'Collection Family Name';
+  public centralizedServerLocation: string = 'https://yourwebsite.com';
   public storeOnCentralizedServer: boolean = false;
   public projectLayers: Layer[] = [
 
@@ -53,5 +53,7 @@ export class ProjectService {
   public generatedItems: GeneratedItem[] = [
 
   ];
+  public imageHeight: number = 300;
+  public imageWidth: number = 300;
   constructor() {}
 }

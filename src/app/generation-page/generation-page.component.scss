@@ -2,7 +2,7 @@
 :host {
     display:grid;
     align-self: start;
-    grid-auto-rows: min-content;
+    grid-template-rows: min-content min-content max-content max-content min-content;
     grid-auto-columns: 1fr;
     row-gap:10px;
     h4 {
@@ -12,6 +12,11 @@
             font-variant: small-caps;
             text-decoration:underline solid $yellow;
         }
+    }
+    span {
+        min-width:100%;
+        justify-self: center;
+        text-align: center;
     }
     div.image {
         display:grid;
@@ -28,10 +33,11 @@
             align-content: center;
             justify-items: center;
             justify-content: center;
+            font-size:0.75rem;
         }
         span#generated-image, svg#generated-image, canvas#generated-image {
-            min-height:300px;
-            min-width:300px;
+            min-height:1000px;
+            min-width:1000px;
             grid-area:generated-image;
         }
     }

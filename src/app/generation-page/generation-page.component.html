@@ -3,42 +3,88 @@
   <small>{{projectService.projectName}}</small>
 </h4>
 
-<button [ngClass]="{
- 'start': started === false,
- 'generating': started === true && this.finished === false
-}" (click)="startGeneration()" *ngIf="started === false || this.finished === false">
-  <span *ngIf="setup === false && started === false">
-    SETUP
-  </span>
-  <span *ngIf="setup === true && started === false">
+<button class="start" (click)="startGeneration()" *ngIf="
+this.setup === true &&
+this.started === false &&
+this.finished === false">
+  <span>
     START
-  </span>
-  <span *ngIf="started === true && this.finished === false">
-    GENERATING #{{this.generating}}
-  </span>
-  <span *ngIf="started === true && this.finished === true">
-    FINISHED
   </span>
 </button>
 
-<button class="save" *ngIf="started === true && this.finished === true" (click)="saveCollection()">
+<span class="set-up" *ngIf="setup === false">
+  SETTING UP...
+</span>
+
+<span class="generating" *ngIf="
+this.setup === true &&
+this.started === true &&
+this.finished === false">
+  GENERATING #{{this.generating}}
+</span>
+
+<button class="save" *ngIf="
+this.setup === true &&
+this.started === true &&
+this.finished === true &&
+this.raritiesCalculated === false &&
+this.metadataGenerated === false" (click)="calculateRarities()">
+  <span>
+    CALCULATE RARITIES
+  </span>
+</button>
+
+<button class="save" *ngIf="
+this.setup === true &&
+this.started === true &&
+this.finished === true &&
+this.raritiesCalculated === true &&
+this.metadataGenerated === false" (click)="generateMetadata()">
+  <span>
+    GENERATE METADATA
+  </span>
+</button>
+
+<button class="save" *ngIf="
+this.setup === true &&
+this.started === true &&
+this.finished === true &&
+this.raritiesCalculated === true &&
+this.metadataGenerated === true" (click)="saveCollection()">
   <span>
     SAVE
   </span>
 </button>
 
 
-<div class="image">
+<div class="image png-image">
   <span id="generated-image">
     YOUR GENERATED
-    ITEMS WILL BE
+    PNG WILL BE
     DISPLAYED HERE
   </span>
-  <svg id="generated-image" version="1.1" width="300" height="300" shape-rendering="crispEdges"
-    xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape" xmlns="http://www.w3.org/2000/svg"
-    xmlns:svg="http://www.w3.org/2000/svg" #SVGElement>
+  <canvas id="generated-image" width="285" height="404" #canvasElement></canvas>
+</div>
+<div class="image svg-image">
+  <span id="generated-image">
+    YOUR GENERATED
+    SVG WILL BE
+    DISPLAYED HERE
+  </span>
+  <svg id="generated-image" version="1.1" width="285" height="404" shape-rendering="crispEdges"
+    
+  viewBox="0 -80 285 504"
+  sodipodi:docname="BuiltByThePixelFactory.svg"
+  inkscape:version="1.1 (c68e22c387, 2021-05-23)"
+  preserveAspectRatio="xMidYMid"
+  anigen:version="0.8.1"
+  xmlns:inkscape="http://www.inkscape.org/namespaces/inkscape"
+  xmlns:sodipodi="http://sodipodi.sourceforge.net/DTD/sodipodi-0.dtd"
+  xmlns="http://www.w3.org/2000/svg"
+  xmlns:svg="http://www.w3.org/2000/svg"
+  xmlns:anigen="http://www.anigen.org/namespace"
+  xmlns:xlink="http://www.w3.org/1999/xlink" #SVGElement>
   </svg>
-  <canvas id="generated-image" height="300" width="300" #canvasElement></canvas>
 </div>
 
 

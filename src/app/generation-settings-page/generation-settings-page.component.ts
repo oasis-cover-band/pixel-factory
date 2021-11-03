@@ -34,9 +34,24 @@ export class GenerationSettingsPageComponent implements OnInit {
   saveTimeBetweenGenerations(): void {
     this.projectService.timeBetweenGenerations = this.timeBetweenGenerationsInputElement.nativeElement.value;
   }
+  toggleStoreOnCentralizedServer(): void {
+    this.projectService.storeOnCentralizedServer = !this.projectService.storeOnCentralizedServer;
+  }
 
   saveCentralizedServerLocation(): void {
     this.projectService.centralizedServerLocation = this.centralizedServerLocationInputElement.nativeElement.value;
+  }
+
+  togglePrintAsPNG(): void {
+    this.projectService.printAsPNG = !this.projectService.printAsPNG;
+  }
+
+  togglePrintAsSVG(): void {
+    this.projectService.printAsSVG = !this.projectService.printAsSVG;
+  }
+
+  togglePrintAsHTML(): void {
+    this.projectService.printAsHTML = !this.projectService.printAsHTML;
   }
 
   backToProject(): void {

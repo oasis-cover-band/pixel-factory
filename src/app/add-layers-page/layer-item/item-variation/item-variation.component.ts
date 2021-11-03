@@ -90,7 +90,7 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
         colors: [
 
         ],
-        rarity: 0
+        rarity: 10
       };
       this.layersService.projectLayers[this.layerIndex].variations[this.index] = uploadedVariation;
 
@@ -116,7 +116,7 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
         colors: [
 
         ],
-        rarity: 0
+        rarity: 10
       };
       this.layersService.projectLayers[this.layerIndex].variations[this.index] = uploadedVariation;
 

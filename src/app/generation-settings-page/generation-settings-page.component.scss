@@ -21,4 +21,42 @@
             text-decoration:underline solid $yellow;
         }
     }
+    span.check-box {
+        display:grid;
+        align-content: center;
+        align-items: center;
+        justify-content: center;
+        justify-items: center;
+        text-align: center;
+        min-width:200px;
+        max-width:200px;
+        min-height:200px;
+        justify-self: center;
+        small {
+            font-size:0.75rem;
+        }
+        pointer-events: none;
+        align-self: stretch;
+        grid-template-rows: max-content 1fr;
+        span {
+            min-height:auto;
+        }
+        button {
+            pointer-events: all;
+            border:10px solid $white;
+            min-height:100%;
+            align-content: center;
+            align-items: center;
+            justify-content: center;
+            justify-items: center;
+            span {
+                align-content: center;
+                align-items: center;
+                justify-content: center;
+                justify-items: center;
+                align-self: center;
+                pointer-events: none;
+            }
+        }
+    }
 }

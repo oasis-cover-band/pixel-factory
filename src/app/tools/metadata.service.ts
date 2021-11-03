@@ -39,6 +39,7 @@ export class MetadataService {
     }) => {
 
       generatedMetadata = await this.outputMetadata(generatedItemIndex, returnedValues);
+      this.projectService.generatedItems[generatedItemIndex].json = generatedMetadata;
     });
     return await generatedMetadata;
   }

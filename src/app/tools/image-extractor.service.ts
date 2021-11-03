@@ -1,5 +1,6 @@
 import { Injectable, ElementRef } from '@angular/core';
 import { ProjectService } from '../project-tools/project.service';
+import { GeneratedItem } from '../project-output/generated-item.model';
 
 @Injectable({
   providedIn: 'root'
@@ -11,21 +12,19 @@ export class ImageExtractorService {
     private projectService: ProjectService
   ) { }
 
-  async extractAndExport(SVGElement: ElementRef, PNGCanvasElement: ElementRef): Promise<any> {
+  async extractAndExport(generatedItem: GeneratedItem, SVGElement: ElementRef, PNGCanvasElement: ElementRef): Promise<any> {
     if (this.projectService.printAsPNG && this.projectService.printAsSVG && this.projectService.uploadAsSVG) {
-      await this.extractAndExportSVGAndPNGAfterDrawingPNGFromSVG(SVGElement, PNGCanvasElement).then(after => {
+      await this.extractAndExportSVGAndPNGAfterDrawingPNGFromSVG(generatedItem, SVGElement, PNGCanvasElement).then(after => {
 
       });
       return;
-    }
-    if (this.projectService.printAsPNG && this.projectService.uploadAsPNG) {
+    } else if (this.projectService.printAsPNG && this.projectService.uploadAsPNG) {
       await this.extractAndExportPNG(PNGCanvasElement).then(after => {
 
       });
       return;
-    }
-    if (this.projectService.printAsSVG && this.projectService.uploadAsSVG) {
-      await this.extractAndExportSVG(SVGElement).then(after => {
+    } else if (this.projectService.printAsSVG && this.projectService.uploadAsSVG) {
+      await this.extractAndExportSVG(generatedItem, SVGElement).then(after => {
 
       });
       return;
@@ -46,43 +45,51 @@ export class ImageExtractorService {
   }
 
   
-  async extractAndExportSVG(SVGElement: ElementRef): Promise<any> {
-    // await this.extractSVGBlobs(SVGElement).then(async (elements: {
-    //   blobURL: string, 
-    //   outerHTML: any,
-    //   blobSVG: Blob, 
-    //   clonedSVGElement: any
-    // }) => {
-
-    // });
-  }
-  
-  async extractAndExportSVGAndPNGAfterDrawingPNGFromSVG(SVGElement: ElementRef, PNGCanvasElement: ElementRef): Promise<any> {
+  async extractAndExportSVG(generatedItem: GeneratedItem, SVGElement: ElementRef): Promise<any> {
     await this.extractSVGBlobs(SVGElement).then(async (elements: {
       blobURL: string, 
       outerHTML: any,
       blobSVG: Blob, 
       clonedSVGElement: any
     }) => {
+      if (this.projectService.printAsPNG === false) {
+        generatedItem.image0 = elements.blobSVG;
+      } else {
+        generatedItem.image1 = elements.blobSVG;
+      }
+    });
+  }
+  
+  async extractAndExportSVGAndPNGAfterDrawingPNGFromSVG(generatedItem: GeneratedItem, SVGElement: ElementRef, PNGCanvasElement: ElementRef): Promise<any> {
+    await this.extractSVGBlobs(SVGElement).then(async (elements: {
+      blobURL: string, 
+      outerHTML: any,
+      blobSVG: Blob, 
+      clonedSVGElement: any
+    }) => {
+      generatedItem.image1 = elements.blobSVG;
       const img = await new Image();
       img.src = await elements.blobURL;
-      img.onload = this.drawPNG(img, PNGCanvasElement, elements)
+      img.onload = this.drawPNG(generatedItem, img, PNGCanvasElement, elements)
     });
   }
 
-  drawPNG(img: HTMLImageElement, PNGCanvasElement: ElementRef, elements: {
+  drawPNG(generatedItem: GeneratedItem, img: HTMLImageElement, PNGCanvasElement: ElementRef, elements: {
     blobURL: string, 
     outerHTML: any,
     blobSVG: Blob, 
     clonedSVGElement: any
   }): any {
     return async () => {
+      
+        await PNGCanvasElement.nativeElement.getContext('2d').clearRect(0, 0, this.projectService.imageWidth, this.projectService.imageHeight);
         await PNGCanvasElement.nativeElement.getContext('2d').drawImage(img, 0, 0);
         await URL.revokeObjectURL(elements.blobURL);
   
         let blobPNG!: Blob;
         await PNGCanvasElement.nativeElement.toBlob(async (PNGtoBlob: Blob) => {
           blobPNG = await PNGtoBlob;
+          generatedItem.image0 = await blobPNG;
         });
         return blobPNG;
       };
