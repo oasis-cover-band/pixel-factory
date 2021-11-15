@@ -1,0 +1,46 @@
+<button class="back-layers" (click)="backToEditLayerVaritions()">
+    <span>
+        BACK TO LAYERS
+    </span>
+</button>
+
+<button class="back-project" (click)="backToProject()">
+    <span>
+        BACK TO PROJECT
+    </span>
+</button>
+
+<h6 *ngIf="this.variationIndex!==undefined">
+    {{layersService.projectLayers[this.layerIndex].variations[this.variationIndex].name}} colors:
+</h6>
+
+<h6 *ngIf="this.variationIndex==undefined">
+    {{layersService.projectLayers[this.layerIndex].name}} colors:
+</h6>
+
+<button mat-raised-button class="add-color" mat-raised-button color="primary" (click)="addColor()">Add Color</button>
+<button mat-raised-button class="submit-form" mat-raised-button color="primary" (click)="submitForm()">Submit</button>
+
+<form [formGroup]="myForm">
+    Value: {{ myForm.value | json }}
+
+    <div formArrayName="colors">
+        <div *ngFor="let color of colorForms.controls; let i=index" [formGroupName]="i">
+            <div class="flex-container">
+
+                <mat-form-field class="select-color">
+                    <input matInput type="color" formControlName="color" value="#ff0000">
+                </mat-form-field>
+
+                <div class="item">
+                    <button class="remove" id="deleteColor" (click)="deleteColor(i)">
+                        <span>
+                            x
+                        </span>
+                    </button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</form>

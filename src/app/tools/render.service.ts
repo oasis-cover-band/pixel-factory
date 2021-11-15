@@ -58,7 +58,7 @@ export class RenderService {
   private async compileSVGLayers(compiledLayers: BehaviorSubject<string>[], generatedItemsLayers: GeneratedItemLayer[]): Promise<any> {
     await generatedItemsLayers?.forEach((generatedItemLayer: GeneratedItemLayer) => {
       const compiledLayer = new BehaviorSubject(``);
-      compiledLayer.next(compiledLayer.getValue().concat('<g color="' + this.color[Math.floor(Math.random() * this.color.length)].value + '">'));
+      compiledLayer.next(compiledLayer.getValue().concat('<g color="' + this.color[Math.floor(Math.random() * this.color.length)].value + '">')); 
       compiledLayer.next(compiledLayer.getValue().concat(String(generatedItemLayer.value)));
       compiledLayer.next(compiledLayer.getValue().concat('</g>'));
       compiledLayers.push(compiledLayer);

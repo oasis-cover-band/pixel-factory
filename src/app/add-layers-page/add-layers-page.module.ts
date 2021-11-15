@@ -7,11 +7,11 @@ import { LayerItemModule } from './layer-item/layer-item.module';
 
 @NgModule({
   declarations: [
-    AddLayersPageComponent
+    AddLayersPageComponent,
   ],
   imports: [
     CommonModule,
-    LayerItemModule
+    LayerItemModule,
   ],
   exports: [
     AddLayersPageComponent

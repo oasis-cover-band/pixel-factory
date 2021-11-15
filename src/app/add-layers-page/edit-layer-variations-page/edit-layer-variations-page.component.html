@@ -1,8 +1,28 @@
-
 <h4>
-    VARIATIONS FOR
+    SETTINGS FOR
     <small>{{layersService.projectLayers[this.layerIndex]?.name}}</small>
 </h4>
+
+<h6>
+    LAYER SETTINGS
+</h6>
+
+<button class="change-file" (click)="setColors()">
+    <span>
+        SET COLORS
+    </span>
+</button>
+
+<button class="change-file" (click)="backToLayers()">
+    <span>
+        SET CONFLICTS
+    </span>
+</button>
+
+
+<h6>
+    VARIATION SETTINGS
+</h6>
 
 <button class="add-variations" (click)="fileUpload.click()">
     <span>
@@ -11,6 +31,8 @@
     <input type="file" class="file-input"
     (change)="uploadVariationFile($event)" multiple #fileUpload />
 </button>
+
+
 
 <ng-container *ngFor="let itemVariation of layersService.projectLayers[this.layerIndex]?.variations; let index = index">
     <app-item-variation [layerIndex]="this.layerIndex" [index]="index" [data]="itemVariation" [@fadeAnimations]></app-item-variation>

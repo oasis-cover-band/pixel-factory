@@ -59,6 +59,10 @@ export class EditLayerVariationsPageComponent implements OnInit {
     this.router.navigateByUrl('add-layers');
   }
 
+  setColors(): void {
+    this.router.navigate(['color-picker', this.layerIndex])
+  }
+
   backToProject(): void {
     this.router.navigateByUrl('start-new-project');
   }
@@ -108,9 +112,8 @@ export class EditLayerVariationsPageComponent implements OnInit {
         type: file.type,
         thumbnail: reader.result,
         data: reader.result,
-        colors: [
-
-        ],
+        variationColors: [],
+        layerColors: [],
         rarity: 10
       };
       this.layersService.projectLayers[this.layerIndex].variations.push(uploadedVariation);
@@ -137,9 +140,8 @@ export class EditLayerVariationsPageComponent implements OnInit {
         type: file.type,
         thumbnail: reader.result,
         data: reader.result,
-        colors: [
-
-        ],
+        variationColors: [],
+        layerColors: [],
         rarity: 10
       };
       this.layersService.projectLayers[this.layerIndex].variations.push(uploadedVariation);

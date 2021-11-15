@@ -3,7 +3,7 @@ import {
   OnInit,
   Input,
   ViewChild,
-  ElementRef
+  ElementRef,
 } from '@angular/core';
 import {
   Layer
@@ -27,7 +27,6 @@ import {
   styleUrls: ['./layer-item.component.scss']
 })
 export class LayerItemComponent implements OnInit {
-
   @Input() data!: Layer;
   @Input() index!: number;
   @ViewChild('nameInputElement') nameInputElement!: ElementRef < any > ;
@@ -38,7 +37,7 @@ export class LayerItemComponent implements OnInit {
   constructor(
     private layersService: LayersService,
     private router: Router,
-    private uploaderService: UploaderService
+    private uploaderService: UploaderService,
   ) {}
 
   ngOnInit(): void {}
@@ -122,9 +121,8 @@ export class LayerItemComponent implements OnInit {
         type: file.type,
         thumbnail: reader.result,
         data: reader.result,
-        colors: [
-
-        ],
+        variationColors: [],
+        layerColors: [],
         rarity: 10
       };
       this.layersService.projectLayers[this.index].variations.push(uploadedVariation);
@@ -151,9 +149,8 @@ export class LayerItemComponent implements OnInit {
         type: file.type,
         thumbnail: reader.result,
         data: reader.result,
-        colors: [
-
-        ],
+        variationColors: [],
+        layerColors: [],
         rarity: 10
       };
       this.layersService.projectLayers[this.index].variations.push(uploadedVariation);

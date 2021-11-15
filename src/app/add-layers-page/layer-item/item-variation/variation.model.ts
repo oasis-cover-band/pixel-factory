@@ -5,6 +5,7 @@ export class Variation {
     type!: string;
     thumbnail!: string | ArrayBuffer | null;
     data!: string | ArrayBuffer | null;  
-    colors!: number[];
+    variationColors!: number[];
+    layerColors!: number[];
     rarity!: number;
 }

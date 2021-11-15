@@ -1,4 +1,5 @@
 import {
+  Component,
   NgModule
 } from '@angular/core';
 import {
@@ -39,6 +40,8 @@ import { GenerationSettingsPageModule } from './generation-settings-page/generat
 import { GenerationSettingsPageComponent } from './generation-settings-page/generation-settings-page.component';
 import { GenerationPageModule } from './generation-page/generation-page.module';
 import { GenerationPageComponent } from './generation-page/generation-page.component';
+import { ColorPickerFormComponent } from './color-picker-form/color-picker-form.component';
+import { ColorPickerFormModule } from './color-picker-form/color-picker-form.module';
 
 const routes: Routes = [{
     path: '',
@@ -67,6 +70,14 @@ const routes: Routes = [{
   {
     path: 'generate',
     component: GenerationPageComponent
+  },
+  {
+    path: 'color-picker/:layerIndex',
+    component: ColorPickerFormComponent
+  },
+  {
+    path: 'color-picker/:layerIndex/:variationIndex', 
+    component: ColorPickerFormComponent
   }
 ];
 
@@ -79,7 +90,8 @@ const routes: Routes = [{
     ProjectSettingsPageModule,
     EditLayerVariationsPageModule,
     GenerationPageModule,
-    GenerationSettingsPageModule
+    GenerationSettingsPageModule,
+    ColorPickerFormModule
   ],
   exports: [RouterModule]
 })
