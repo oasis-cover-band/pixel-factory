@@ -24,8 +24,6 @@ export class ColorPickerFormComponent implements OnInit {
   variationIndex!: number;
   activatedRouteListener!: Subscription;
   colors!: number[];
-  temp!: number[];
-  testColor!: string;
 
   variationForm: boolean = false;
   layerForm: boolean = false;
@@ -76,6 +74,7 @@ export class ColorPickerFormComponent implements OnInit {
   }
 
   submitForm() {
+    this.convertHexToDecimals()
     if (this.layerForm) {
       for (let i = 0; i < this.layersService.projectLayers[this.layerIndex].variations.length; i++ ) {
         this.layersService.projectLayers[this.layerIndex].variations[i]
