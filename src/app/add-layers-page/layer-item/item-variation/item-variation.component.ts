@@ -18,6 +18,7 @@ import {
 import {
   BehaviorSubject
 } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-item-variation',
@@ -38,6 +39,7 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
   progress: number = 0;
   infoMessage!: string;
   constructor(
+    private router: Router,
     private layersService: LayersService,
     private uploaderService: UploaderService
   ) {}
@@ -60,6 +62,10 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
 
   remove(): void {
     this.layersService.projectLayers[this.layerIndex].variations.splice(this.index, 1);
+  }
+
+  setColors(): void {
+    this.router.navigate(['color-picker', this.layerIndex, this.index]);
   }
 
   async editVariationFile(event: any) {
@@ -87,9 +93,8 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
         type: file.type,
         thumbnail: reader.result,
         data: reader.result,
-        colors: [
-
-        ],
+        variationColors: [],
+        layerColors: [],
         rarity: 10
       };
       this.layersService.projectLayers[this.layerIndex].variations[this.index] = uploadedVariation;
@@ -113,9 +118,8 @@ export class ItemVariationComponent implements OnInit, AfterViewInit {
         type: file.type,
         thumbnail: reader.result,
         data: reader.result,
-        colors: [
-
-        ],
+        variationColors: [],
+        layerColors: [],
         rarity: 10
       };
       this.layersService.projectLayers[this.layerIndex].variations[this.index] = uploadedVariation;

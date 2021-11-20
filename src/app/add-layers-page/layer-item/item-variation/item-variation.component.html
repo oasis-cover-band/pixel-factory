@@ -1,28 +1,42 @@
 
-    <figure class="image is-100x100">
-        <img *ngIf="this.data.type !== 'image/svg+xml'"[src]="this.data.thumbnail" />
-        <svg #SVGVariationElement *ngIf="this.data.type === 'image/svg+xml'">
-            {{this.data.thumbnail}}
-        </svg>
-    </figure>
+<figure class="image is-100x100">
+    <img *ngIf="this.data.type !== 'image/svg+xml'"[src]="this.data.thumbnail" />
+    <svg #SVGVariationElement *ngIf="this.data.type === 'image/svg+xml'">
+        {{this.data.thumbnail}}
+    </svg>
+</figure>
 
 <input #nameInputElement placeholder="Layer Variation Name" [value]="this.data.name" (change)="saveName()" />
 
 <input #rarityInputElement placeholder="Layer Rarity" [value]="this.data.rarity" (change)="saveRarity()" />
 
-<button class="change-file" (click)="fileUpload.click()">
-    <span>
-        <small>CHANGE FILE</small>
-    </span>
-    <input type="file" class="file-input"
-    (change)="editVariationFile($event)" #fileUpload />
-</button>
+<div class="wrapper">
+    <div class="grid-container"><input [value]="this.data.size + ' bytes'" [disabled]="true" /></div>
+    <div class="grid-container"><input [value]="this.data.type" [disabled]="true" size="small"/></div> 
+</div>
 
-<input [value]="this.data.size + ' bytes'" [disabled]="true" />
+<div class="wrapper">
+    <button class="colors" (click)="setColors()">
+        <span>
+            SET COLORS
+        </span>
+    </button>
+    <br>
+    <button class="colors"> 
+        <span>
+            SET CONFLICTS
+        </span>
+    </button>
+    <br>
+    <button class="colors" (click)="fileUpload.click()">
+        <span>
+            CHANGE FILE
+        </span>
+        <input type="file" class="file-input"
+        (change)="editVariationFile($event)" #fileUpload />
+    </button>
+</div>
 
-<input [value]="this.data.type" [disabled]="true" />
-
-<!-- PICK COLORS -->
 
 <button class="remove"  (click)="remove()">
     <span>

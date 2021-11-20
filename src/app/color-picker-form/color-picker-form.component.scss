@@ -1,0 +1,29 @@
+@import '../colors.scss';
+:host {
+    display:grid;
+    align-self: start;
+    grid-auto-rows: min-content;
+    grid-auto-columns: 1fr;
+    row-gap:10px;
+    span.shift-up {
+        transform:rotate(180deg);
+    }
+
+    .colors {
+        margin-bottom: 1em;
+    }
+
+    .flex-container {
+        display: grid;
+        margin: 1em;
+        grid-template-columns: 5fr 1fr;
+        align-content: center;
+        text-align: center;
+        grid-gap: 1em;
+    }
+    .item {
+        border: 1px;
+        min-height: 100%;
+        border-color: white;
+    }
+}
